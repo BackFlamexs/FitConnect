@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1E1B24"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crie sua conta\nFitConnect"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="32dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comece sua jornada fitness hoje mesmo."
+            android:textColor="#A0A0A0"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome completo"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_nome_completo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Ex: Vitor Gomes"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome de usuário"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_nome_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Ex: vitorgomes"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="E-mail"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_email_cadastro"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textEmailAddress"
+            android:hint="seuemail@exemplo.com"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirmação de E-mail"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_confirmar_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textEmailAddress"
+            android:hint="Confirme seu e-mail"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Senha"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_senha_cadastro"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textPassword"
+            android:hint="••••••••"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefone"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/et_telefone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="phone"
+                android:hint="(11) 99999-9999"
+                android:textColorHint="#808080"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#333333"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gênero"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioGroup
+                android:id="@+id/rg_genero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="32dp">
+
+                <RadioButton
+                    android:id="@+id/rb_masculino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masculino"
+                    android:textColor="#FFFFFF"
+                    android:buttonTint="#4CAF50" />
+
+                <RadioButton
+                    android:id="@+id/rb_feminino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="Feminino"
+                    android:textColor="#FFFFFF"
+                    android:buttonTint="#4CAF50" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_cadastrar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Cadastrar"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="#4CAF50"
+            android:layout_marginBottom="16dp"/>
+
+
+        <Button
+            android:id="@+id/btn_voltar_menu"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#4CAF50"
+            android:text="Voltar"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ao se cadastrar, você concorda com nossos Termos de Uso."
+            android:textAlignment="center"
+            android:textColor="#A0A0A0"
+            android:textSize="12sp"
+            android:layout_marginBottom="32dp"/>
+
+    </LinearLayout>
+</ScrollView>

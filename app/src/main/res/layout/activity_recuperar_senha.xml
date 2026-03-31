@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1E1B24"
+    android:padding="24dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Esqueceu a senha?"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Digite seu e-mail abaixo para receber as instruções de recuperação."
+        android:textColor="#A0A0A0"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:layout_marginBottom="48dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E-mail"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_email_recuperar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="textEmailAddress"
+        android:hint="seuemail@com"
+        android:textColorHint="#808080"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#333333"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/btn_recuperar_senha"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Recuperar"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:backgroundTint="#4CAF50"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:id="@+id/tv_voltar_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Voltar para o Login"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:clickable="true"
+        android:focusable="true"/>
+
+</LinearLayout>
