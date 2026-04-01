@@ -9,12 +9,12 @@ import retrofit2.http.Query
 
 interface SupabaseApi {
 
-    // ROTA DE CADASTRO
+    // Rota de usuario, que ele vai usar para puxar os dados no banco
     @Headers("Prefer: return=representation")
     @POST("rest/v1/usuarios")
     fun cadastrarUsuario(@Body usuario: Usuario): Call<List<Usuario>>
 
-    // ROTA DE LOGIN
+    // Rota de login, que ele vai usar para puxar os dados no banco
     @GET("rest/v1/usuarios")
     fun fazerLogin(
         @Query("email") email: String,

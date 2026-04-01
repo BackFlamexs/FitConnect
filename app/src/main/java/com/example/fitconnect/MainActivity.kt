@@ -81,8 +81,6 @@ class MainActivity : AppCompatActivity() {
                             // 5. Destruímos a tela de login para impedir que o usuário volte para ela sem querer apertando a seta de voltar
                             finish()
 
-                            // =====================================
-
                         } else {
                             Toast.makeText(this@MainActivity, "E-mail ou senha incorretos.", Toast.LENGTH_LONG).show()
                         }
