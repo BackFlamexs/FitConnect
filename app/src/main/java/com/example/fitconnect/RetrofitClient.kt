@@ -11,7 +11,7 @@ object RetrofitClient {
     //A URL do projeto.
     private const val BASE_URL = "https://gltouzhsqtvoinphhbmv.supabase.co/"
 
-    //Publishable Key.
+    // Publishable Key — Project Settings → API → Project API keys
     private const val SUPABASE_KEY = "sb_publishable__uZ70sEC2kZUtHrIBbUY2w_FlLYMJbY"
 
     private val httpClient = OkHttpClient.Builder().apply {

@@ -1,170 +1,335 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#15131C"> <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:background="#15131C">
 
-    <LinearLayout
+    <!-- Conteúdo Rolável -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="44dp" android:layout_marginBottom="32dp">
-
-        <View
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="@drawable/bg_tag_verde" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="16dp">
+            android:padding="24dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bem-vindo de volta,"
-                android:textColor="#A0A0A0"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_nome_usuario_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Carregando..."
-                android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_cartao_home"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:layout_marginBottom="32dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            <!-- Cabeçalho (Perfil) -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp">
+
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="56dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="26dp"
+                        app:cardElevation="0dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_avatar" />
+                    </androidx.cardview.widget.CardView>
+
+                    <View
+                        android:id="@+id/v_profile_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_circle_profile" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sequência Semanal"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bem-vindo de volta,"
+                        android:textColor="#A0A0A0"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_nome_usuario_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Olá, Vitor"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Sequência Semanal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card_dark"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginBottom="32dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Continue no foco!"
-                    android:textColor="#A0A0A0"
-                    android:textSize="14sp" />
+                    android:layout_marginBottom="16dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sequência Semanal"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Continue no foco!"
+                            android:textColor="#A0A0A0"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_pill_dark"
+                        android:text="🔥 5 Dias"
+                        android:textColor="#4CAF50"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <!-- Dias da Semana -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SEG" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginBottom="8dp"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/ic_check_green" android:background="@drawable/bg_circle_profile" android:padding="6dp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TER" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginBottom="8dp"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/ic_check_green" android:background="@drawable/bg_circle_profile" android:padding="6dp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="QUA" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginBottom="8dp"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/ic_check_green" android:background="@drawable/bg_circle_profile" android:padding="6dp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="QUI" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginBottom="8dp"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/ic_check_green" android:background="@drawable/bg_circle_profile" android:padding="6dp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SEX" android:textColor="#4CAF50" android:textStyle="bold" android:textSize="10sp" android:layout_marginBottom="8dp"/>
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@drawable/ic_check_green" android:background="@drawable/bg_circle_profile" android:padding="6dp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SÁB" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginBottom="8dp"/>
+                        <TextView android:layout_width="32dp" android:layout_height="32dp" android:text="6" android:textColor="#A0A0A0" android:background="@drawable/bg_circle_gray" android:gravity="center"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DOM" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginBottom="8dp"/>
+                        <TextView android:layout_width="32dp" android:layout_height="32dp" android:text="7" android:textColor="#A0A0A0" android:background="@drawable/bg_circle_gray" android:gravity="center"/>
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/bg_tag_verde"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="6dp"
-                android:text="🔥 5 Dias"
-                android:textColor="#4CAF50"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+                android:text="Menu Principal"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
 
-    </LinearLayout>
+            <!-- Linha 1: Treinos -->
+            <RelativeLayout
+                android:id="@+id/card_treinos"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@drawable/bg_card_dark"
+                android:clipToOutline="true"
+                android:layout_marginBottom="16dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/img_treinos"
+                    android:scaleType="centerCrop" />
+                <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_overlay_dark"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentBottom="true"
+                    android:padding="20dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TREINOS" android:textColor="#FFFFFF" android:textSize="22sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Acessar rotina" android:textColor="#A0A0A0" android:textSize="14sp"/>
+                </LinearLayout>
+            </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Menu Principal"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+            <!-- Linha 2: Ajuda / Arquivos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
 
+                <RelativeLayout
+                    android:id="@+id/card_ajuda"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="140dp"
+                    android:background="@drawable/bg_card_dark"
+                    android:clipToOutline="true"
+                    android:layout_marginEnd="8dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_ajuda"
+                        android:scaleType="centerCrop" />
+                    <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_overlay_dark"/>
+                    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_alignParentBottom="true" android:padding="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AJUDA" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="18sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Central de Suporte" android:textColor="#A0A0A0" android:textSize="12sp"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/card_meus_arquivos"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="140dp"
+                    android:background="@drawable/bg_card_dark"
+                    android:clipToOutline="true"
+                    android:layout_marginStart="8dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_meus_arquivos"
+                        android:scaleType="centerCrop" />
+                    <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_overlay_dark"/>
+                    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_alignParentBottom="true" android:padding="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MEUS ARQUIVOS" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="18sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dietas e PDFs" android:textColor="#A0A0A0" android:textSize="12sp"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- Linha 3: Feedbacks / Galeria -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="32dp">
+
+                <RelativeLayout
+                    android:id="@+id/card_feedbacks"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="140dp"
+                    android:background="@drawable/bg_card_dark"
+                    android:clipToOutline="true"
+                    android:layout_marginEnd="8dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_feedbacks"
+                        android:scaleType="centerCrop" />
+                    <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_overlay_dark"/>
+                    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_alignParentBottom="true" android:padding="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FEEDBACKS" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="18sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Veja seus feedbacks" android:textColor="#A0A0A0" android:textSize="12sp"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/card_galeria"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="140dp"
+                    android:background="@drawable/bg_card_dark"
+                    android:clipToOutline="true"
+                    android:layout_marginStart="8dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img_galeria_treinos"
+                        android:scaleType="centerCrop" />
+                    <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_overlay_dark"/>
+                    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_alignParentBottom="true" android:padding="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GALERIA DE TREINOS" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="14sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Biblioteca" android:textColor="#A0A0A0" android:textSize="12sp"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation -->
     <LinearLayout
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@drawable/bg_cartao_home"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:layout_marginBottom="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TREINOS"
-            android:textColor="#FFFFFF"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Acessar rotina"
-            android:textColor="#A0A0A0"
-            android:textSize="14sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:background="#1C1A24"
         android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
+        android:gravity="center_vertical"
+        android:weightSum="4"
+        android:paddingTop="8dp">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="140dp"
-            android:background="@drawable/bg_cartao_home"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:layout_marginEnd="8dp">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AJUDA" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="18sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Central de Suporte" android:textColor="#A0A0A0" android:textSize="12sp"/>
+        <LinearLayout android:id="@+id/nav_inicio" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_home" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="INÍCIO" android:textColor="#4CAF50" android:textSize="10sp" android:textStyle="bold" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/nav_galeria" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_gallery" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GALERIA" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/nav_ajuda" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_help" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AJUDA" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="140dp"
-            android:background="@drawable/bg_cartao_home"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:layout_marginStart="8dp">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ARQUIVOS" android:textColor="#FFFFFF" android:textStyle="bold" android:textSize="18sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dietas e PDFs" android:textColor="#A0A0A0" android:textSize="12sp"/>
+            android:id="@+id/nav_menu"
+            android:layout_width="0dp" 
+            android:layout_weight="1" 
+            android:layout_height="match_parent" 
+            android:orientation="vertical" 
+            android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_menu_list" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MENU" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp"/>
         </LinearLayout>
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_sair_home"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="32dp"
-        android:text="Sair da Conta"
-        android:textColor="#D32F2F"
-        android:backgroundTint="#25212E" />
-
-</LinearLayout>
-</ScrollView>
+</RelativeLayout>

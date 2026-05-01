@@ -14,7 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitConnect">
         <activity
-            android:name=".HomeActivity"
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MenuActivity"
+            android:theme="@style/Theme.FitConnect.Transparent"
+            android:exported="false" />
+        <activity
+            android:name=".EditarPerfilActivity"
             android:exported="false" />
         <activity
             android:name=".RecuperarSenhaActivity"
@@ -23,14 +35,23 @@
             android:name=".CadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".TreinosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CriacaoTreinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetalheTreinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExecucaoTreinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarTreinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

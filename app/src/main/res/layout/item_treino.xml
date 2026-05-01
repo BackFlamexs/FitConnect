@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card_dark"
+    android:padding="16dp"
+    android:layout_marginBottom="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="#1C1A24"
+        android:layout_marginBottom="12dp">
+        
+        <!-- Placeholder for image -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#333333" />
+
+        <TextView
+            android:id="@+id/tv_tag_dia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HOJE"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:background="@drawable/bg_pill_green"
+            android:layout_margin="8dp"/>
+
+        <ImageView
+            android:id="@+id/iv_mais_opcoes"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_more_vert"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_nome_treino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Peito e Triceps"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="12dp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
+        <TextView
+            android:id="@+id/tv_dia_semana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TERÇA-FEIRA"
+            android:textColor="#4CAF50"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" • Amanhã"
+            android:textColor="#A0A0A0"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_detalhes_treino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intermediário • 6 exercícios • 50 min"
+        android:textColor="#A0A0A0"
+        android:textSize="12sp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btn_visualizar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Visualizar"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:background="@drawable/bg_btn_green"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:backgroundTint="@null"/>
+
+</LinearLayout>

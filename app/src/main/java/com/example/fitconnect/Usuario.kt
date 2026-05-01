@@ -6,5 +6,6 @@ data class Usuario(
     val email: String,
     val senha: String,
     val telefone: String,
-    val genero: String
+    val genero: String,
+    val id: Int = 0
 )

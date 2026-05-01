@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#15131C">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Cabeçalho -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp">
+
+            <ImageView
+                android:id="@+id/iv_voltar_execucao"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Execução de Treino"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_nome_execucao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Treino de Peito e Tríceps"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ 60 min  •  8 Exercícios"
+            android:textColor="#A0A0A0"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="▶ Começar Treino"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:background="@drawable/bg_btn_green"
+            android:layout_marginBottom="24dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:backgroundTint="@null"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textColor="#FFFFFF"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Seção: Aquecimento -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aquecimento"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 Séries"
+                android:textColor="#4CAF50"
+                android:textSize="12sp"
+                android:background="@drawable/bg_pill_dark"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <!-- Card Aquecimento -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_dark"
+            android:padding="16dp"
+            android:layout_marginBottom="32dp">
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+                <View
+                    android:id="@+id/v_img_aquec"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="#1C1A24"
+                    android:layout_marginEnd="16dp"/>
+                <LinearLayout
+                    android:layout_toEndOf="@id/v_img_aquec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rotação de Braços"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aquecimento articular"
+                        android:textColor="#A0A0A0"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- Tabela simulada -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Série" android:textColor="#A0A0A0" android:textSize="12sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Concluído ✓" android:textColor="#A0A0A0" android:textSize="12sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+                <TextView android:layout_width="24dp" android:layout_height="24dp" android:text="1" android:textColor="#FFFFFF" android:background="@drawable/bg_circle_empty" android:gravity="center"/>
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Aquecimento Leve" android:textColor="#FFFFFF" android:layout_marginStart="8dp"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="#4CAF50"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView android:layout_width="24dp" android:layout_height="24dp" android:text="2" android:textColor="#FFFFFF" android:background="@drawable/bg_circle_empty" android:gravity="center"/>
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Aquecimento Moderado" android:textColor="#FFFFFF" android:layout_marginStart="8dp"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="#4CAF50"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Seção: Treino Principal -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Treino Principal"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6 Exercícios"
+                android:textColor="#4CAF50"
+                android:textSize="12sp"
+                android:background="@drawable/bg_pill_dark"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <!-- Card Expandido: Supino -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_dark"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+                <View
+                    android:id="@+id/v_img_supino"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="#1C1A24"
+                    android:layout_marginEnd="16dp"/>
+                <LinearLayout
+                    android:layout_toEndOf="@id/v_img_supino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Supino Reto com Barra"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Peitoral Maior"
+                        android:textColor="#A0A0A0"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- Tabela -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Set" android:textColor="#A0A0A0" android:textSize="12sp" android:gravity="center"/>
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Kg" android:textColor="#A0A0A0" android:textSize="12sp" android:gravity="center"/>
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Reps" android:textColor="#A0A0A0" android:textSize="12sp" android:gravity="center"/>
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="✓" android:textColor="#A0A0A0" android:textSize="12sp" android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="1" android:textColor="#FFFFFF" android:gravity="center"/>
+                <EditText android:layout_width="0dp" android:layout_weight="1" android:layout_height="36dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="60" android:gravity="center" android:layout_marginHorizontal="4dp"/>
+                <EditText android:layout_width="0dp" android:layout_weight="1" android:layout_height="36dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="12" android:gravity="center" android:layout_marginHorizontal="4dp"/>
+                <CheckBox android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:buttonTint="#4CAF50" android:checked="true"/>
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="2" android:textColor="#FFFFFF" android:gravity="center"/>
+                <EditText android:layout_width="0dp" android:layout_weight="1" android:layout_height="36dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="65" android:gravity="center" android:layout_marginHorizontal="4dp"/>
+                <EditText android:layout_width="0dp" android:layout_weight="1" android:layout_height="36dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="10" android:gravity="center" android:layout_marginHorizontal="4dp"/>
+                <CheckBox android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:buttonTint="#4CAF50"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Finalizar Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Progresso"
+                android:textColor="#A0A0A0"
+                android:textSize="12sp"
+                android:layout_marginEnd="16dp"/>
+            <ProgressBar
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:progress="35"
+                android:progressTint="#4CAF50"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="35%"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"/>
+                
+            <Button
+                android:id="@+id/btn_finalizar_treino"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Finalizar Treino"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:background="@drawable/bg_btn_green"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:backgroundTint="@null"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
