@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#15131C">
+
+    <LinearLayout
+        android:id="@+id/ll_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav_arquivos"
+        android:orientation="vertical">
+
+        <!-- Toolbar -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#1C1A24"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <ImageView
+                android:id="@+id/iv_voltar_arquivos"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_arrow_back"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:padding="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Meus Arquivos"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <!-- Busca -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_search_input"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_search" />
+
+            <EditText
+                android:id="@+id/et_busca_arquivos"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:hint="Pesquisar arquivos..."
+                android:textColorHint="#555555"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:background="@android:color/transparent"
+                android:paddingStart="10dp"
+                android:inputType="text" />
+
+        </LinearLayout>
+
+        <!-- Filtros -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView android:id="@+id/arq_filtro_todos" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Todos" android:textColor="#FFFFFF" android:textSize="13sp" android:background="@drawable/bg_pill_green" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true"/>
+                <TextView android:id="@+id/arq_filtro_videos" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vídeos" android:textColor="#A0A0A0" android:textSize="13sp" android:background="@drawable/bg_pill_dark" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true"/>
+                <TextView android:id="@+id/arq_filtro_pdfs" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PDFs" android:textColor="#A0A0A0" android:textSize="13sp" android:background="@drawable/bg_pill_dark" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true"/>
+                <TextView android:id="@+id/arq_filtro_imagens" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Imagens" android:textColor="#A0A0A0" android:textSize="13sp" android:background="@drawable/bg_pill_dark" android:clickable="true" android:focusable="true"/>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Header lista -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ARQUIVOS RECENTES"
+                android:textColor="#A0A0A0"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="Ver tudo >"
+                android:textColor="#4CAF50"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <!-- Lista de arquivos -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_arquivos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:clipToPadding="false"
+            android:paddingBottom="80dp" />
+
+    </LinearLayout>
+
+    <!-- FAB adicionar arquivo -->
+    <LinearLayout
+        android:id="@+id/fab_adicionar_arquivo"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_fab_green"
+        android:gravity="center"
+        android:layout_above="@+id/bottom_nav_arquivos"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="6dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_add_white" />
+
+    </LinearLayout>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottom_nav_arquivos"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:background="#1C1A24"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="4"
+        android:paddingTop="8dp">
+
+        <LinearLayout android:id="@+id/nav_inicio" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_home" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="INÍCIO" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/nav_galeria" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_gallery" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GALERIA" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/nav_ajuda" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_help" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AJUDA" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/nav_menu" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_menu_list" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MENU" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

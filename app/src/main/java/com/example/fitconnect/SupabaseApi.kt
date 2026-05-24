@@ -62,4 +62,48 @@ interface SupabaseApi {
         @Query("select") select: String = "*",
         @Query("order") order: String = "id.asc"
     ): Call<List<ExercicioBanco>>
+
+    @Headers("Prefer: return=representation")
+    @POST("rest/v1/exercicios")
+    fun criarExercicio(@Body exercicio: ExercicioCriacao): Call<List<ExercicioBanco>>
+
+    @DELETE("rest/v1/exercicios")
+    fun deletarExercicioPorTreino(@Query("treino_id") treinoId: String): Call<Void>
+
+    // ── Galeria de Exercícios ─────────────────────────────────────────────────
+
+    @GET("rest/v1/galeria_exercicios")
+    fun buscarGaleriaExercicios(
+        @Query("select") select: String = "*",
+        @Query("order") order: String = "nome.asc"
+    ): Call<List<GaleriaExercicioBanco>>
+
+    // ── Arquivos ──────────────────────────────────────────────────────────────
+
+    @GET("rest/v1/arquivos")
+    fun buscarArquivos(
+        @Query("usuario_id") usuarioId: String,
+        @Query("select") select: String = "*",
+        @Query("order") order: String = "criado_em.desc"
+    ): Call<List<ArquivoBanco>>
+
+    @Headers("Prefer: return=representation")
+    @POST("rest/v1/arquivos")
+    fun criarArquivo(@Body arquivo: ArquivoCriacao): Call<List<ArquivoBanco>>
+
+    @DELETE("rest/v1/arquivos")
+    fun deletarArquivo(@Query("id") id: String): Call<Void>
+
+    // ── Feedbacks ─────────────────────────────────────────────────────────────
+
+    @Headers("Prefer: return=representation")
+    @POST("rest/v1/feedbacks")
+    fun criarFeedback(@Body feedback: FeedbackCriacao): Call<List<FeedbackBanco>>
+
+    @GET("rest/v1/feedbacks")
+    fun buscarFeedbacks(
+        @Query("usuario_id") usuarioId: String,
+        @Query("select") select: String = "*",
+        @Query("order") order: String = "criado_em.desc"
+    ): Call<List<FeedbackBanco>>
 }

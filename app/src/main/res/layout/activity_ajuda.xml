@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#15131C">
+
+    <!-- Toolbar fixa -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#1C1A24"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <ImageView
+            android:id="@+id/iv_voltar_ajuda"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:padding="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Ajuda e Suporte"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <!-- Conteúdo rolável -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Título principal centralizado -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Como podemos ajudar?"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Encontre respostas rápidas ou entre em\ncontato conosco."
+                android:textColor="#A0A0A0"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Barra de busca com ícone -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_search_input"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:layout_marginBottom="28dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_search" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:hint="Buscar tópicos"
+                    android:textColorHint="#555555"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:background="@android:color/transparent"
+                    android:paddingStart="10dp"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <!-- Tópicos Populares label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TÓPICOS POPULARES"
+                android:textColor="#A0A0A0"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Cards de tópicos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="28dp">
+
+                <!-- Minha Conta -->
+                <LinearLayout
+                    android:id="@+id/card_topico_conta"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="90dp"
+                    android:background="@drawable/bg_topic_card"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_person_topic"
+                        android:background="@drawable/bg_icon_topic"
+                        android:padding="6dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Minha Conta"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal" />
+
+                </LinearLayout>
+
+                <!-- Treinos -->
+                <LinearLayout
+                    android:id="@+id/card_topico_treinos"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="90dp"
+                    android:background="@drawable/bg_topic_card"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_fitness_topic"
+                        android:background="@drawable/bg_icon_topic"
+                        android:padding="6dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Treinos"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Perguntas Frequentes header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="14dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Perguntas Frequentes"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_ver_tudo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ver tudo"
+                    android:textColor="#4CAF50"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <!-- FAQ 1 -->
+            <LinearLayout
+                android:id="@+id/faq_item_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_topic_card"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Como criar um novo treino personalizado?"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/ic_faq_1"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_chevron_down"
+                        android:layout_marginStart="10dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_resposta_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Acesse a tela de Treinos, toque em '+' e siga as etapas para adicionar exercícios, séries e repetições ao seu treino personalizado."
+                    android:textColor="#A0A0A0"
+                    android:textSize="13sp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- FAQ 2 -->
+            <LinearLayout
+                android:id="@+id/faq_item_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_topic_card"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Como sincronizar com Apple Health?"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/ic_faq_2"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_chevron_down"
+                        android:layout_marginStart="10dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_resposta_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vá em Configurações > Integrações e ative a sincronização com Apple Health. Permita o acesso quando solicitado pelo sistema."
+                    android:textColor="#A0A0A0"
+                    android:textSize="13sp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- FAQ 3 -->
+            <LinearLayout
+                android:id="@+id/faq_item_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_topic_card"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Esqueci minha senha, como recuperar?"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/ic_faq_3"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_chevron_down"
+                        android:layout_marginStart="10dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_resposta_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Na tela de login, toque em 'Esqueci minha senha' e informe seu e-mail. Você receberá um link de redefinição em instantes."
+                    android:textColor="#A0A0A0"
+                    android:textSize="13sp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- FAQ 4 -->
+            <LinearLayout
+                android:id="@+id/faq_item_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_topic_card"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Como cancelar a assinatura Premium?"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/ic_faq_4"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_chevron_down"
+                        android:layout_marginStart="10dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_resposta_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Acesse Configurações > Minha Assinatura e selecione 'Cancelar Plano'. O acesso Premium permanece até o fim do período pago."
+                    android:textColor="#A0A0A0"
+                    android:textSize="13sp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- FAQs extras (Ver tudo) -->
+            <LinearLayout
+                android:id="@+id/grupo_faqs_extras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- FAQ 5 -->
+                <LinearLayout
+                    android:id="@+id/faq_item_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_topic_card"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Como alterar minha foto de perfil?"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/ic_faq_5"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_chevron_down"
+                            android:layout_marginStart="10dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_resposta_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vá em Perfil > Editar Perfil e toque na foto atual para escolher uma nova imagem da sua galeria."
+                        android:textColor="#A0A0A0"
+                        android:textSize="13sp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!-- FAQ 6 -->
+                <LinearLayout
+                    android:id="@+id/faq_item_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_topic_card"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="É possível exportar meus treinos?"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/ic_faq_6"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_chevron_down"
+                            android:layout_marginStart="10dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_resposta_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sim! Em Meus Arquivos você pode exportar seus treinos em formato PDF e compartilhar como quiser."
+                        android:textColor="#A0A0A0"
+                        android:textSize="13sp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!-- FAQ 7 -->
+                <LinearLayout
+                    android:id="@+id/faq_item_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_topic_card"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Como compartilhar um treino com amigos?"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/ic_faq_7"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_chevron_down"
+                            android:layout_marginStart="10dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_resposta_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Abra o treino desejado, toque no ícone de compartilhar e envie o link diretamente para seu amigo."
+                        android:textColor="#A0A0A0"
+                        android:textSize="13sp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!-- FAQ 8 -->
+                <LinearLayout
+                    android:id="@+id/faq_item_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_topic_card"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="O app funciona sem internet?"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/ic_faq_8"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_chevron_down"
+                            android:layout_marginStart="10dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_resposta_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Funcionalidades básicas funcionam offline. Para sincronizar dados e acessar novos conteúdos é necessária conexão com a internet."
+                        android:textColor="#A0A0A0"
+                        android:textSize="13sp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Ainda precisa de ajuda? -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pro_banner"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ainda precisa de ajuda?"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nossa equipe de especialistas está pronta para ajudar você a atingir seus objetivos."
+                    android:textColor="#A0A0A0"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Botão com ícone de email -->
+                <LinearLayout
+                    android:id="@+id/btn_enviar_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_btn_green"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_email_white"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enviar E-mail"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="#1C1A24"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="4"
+        android:paddingTop="8dp">
+
+        <LinearLayout
+            android:id="@+id/nav_inicio"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_home" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="INÍCIO" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_galeria"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_gallery" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GALERIA" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_ajuda"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_help" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AJUDA" android:textColor="#4CAF50" android:textSize="10sp" android:textStyle="bold" android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_menu"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_menu_list" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MENU" android:textColor="#A0A0A0" android:textSize="10sp" android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,291 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#15131C">
 
-    <LinearLayout
+    <!-- Toolbar -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="56dp"
+        android:background="#1C1A24"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
-        <!-- Cabeçalho -->
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/iv_voltar_criacao"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:padding="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Criação de Treino"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <ImageView
-                android:id="@+id/iv_voltar_criacao"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_back"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true" />
-
+            <!-- Nome do Treino -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Criação de Treino"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
+                android:text="NOME DO TREINO"
+                android:textColor="#A0A0A0"
+                android:textSize="11sp"
                 android:textStyle="bold"
-                android:layout_centerInParent="true"/>
-        </RelativeLayout>
+                android:layout_marginBottom="8dp" />
 
-        <!-- Nome do Treino -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nome do Treino"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp"/>
-        <EditText
-            android:id="@+id/et_nome_treino_criar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/bg_input_dark"
-            android:hint="Ex: Peito e Tríceps"
-            android:textColorHint="#A0A0A0"
-            android:textColor="#FFFFFF"
-            android:paddingHorizontal="16dp"
-            android:layout_marginBottom="24dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_search_input"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:layout_marginBottom="20dp">
 
-        <!-- Dia da Semana -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dia da Semana"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp"/>
-        <TextView
-            android:id="@+id/tv_dia_semana_criar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/bg_input_dark"
-            android:text="Selecionar dia..."
-            android:textColor="#A0A0A0"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="16dp"
-            android:drawableEnd="@android:drawable/arrow_down_float"
-            android:layout_marginBottom="24dp"
-            android:clickable="true"
-            android:focusable="true"/>
+                <EditText
+                    android:id="@+id/et_nome_treino_criar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Ex: Peito e Tríceps"
+                    android:textColorHint="#555555"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:background="@android:color/transparent"
+                    android:singleLine="true"
+                    android:inputType="text" />
 
-        <!-- Buscar -->
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/bg_input_dark"
-            android:hint="🔍 Adicionar exercício da galeria..."
-            android:textColorHint="#A0A0A0"
-            android:textColor="#FFFFFF"
-            android:paddingHorizontal="16dp"
-            android:layout_marginBottom="32dp"/>
+            </LinearLayout>
 
-        <!-- Header Exercícios -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            <!-- Dia da Semana -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Exercícios (2)"
+                android:text="DIA DA SEMANA"
+                android:textColor="#A0A0A0"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_dia_semana"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_topic_card"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/tv_dia_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Selecionar dia..."
+                    android:textColor="#555555"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@android:drawable/arrow_down_float" />
+
+            </LinearLayout>
+
+            <!-- Categoria -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CATEGORIA"
+                android:textColor="#A0A0A0"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_categoria"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_topic_card"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:layout_marginBottom="28dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/tv_categ_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Selecionar categoria..."
+                    android:textColor="#555555"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@android:drawable/arrow_down_float" />
+
+            </LinearLayout>
+
+            <!-- Header Exercícios -->
+            <TextView
+                android:id="@+id/tv_count_exercicios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exercícios (0)"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="LIMPAR TUDO"
-                android:textColor="#4CAF50"
-                android:textSize="12sp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
-        </RelativeLayout>
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
 
-        <!-- Exercício 1 (Estático) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_card_dark"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp">
-            
-            <RelativeLayout
+            <!-- Container dinâmico de exercícios -->
+            <LinearLayout
+                android:id="@+id/ll_exercicios_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-                <View
-                    android:id="@+id/v_img1"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="#1C1A24"
-                    android:layout_marginEnd="16dp"/>
-                <LinearLayout
-                    android:layout_toEndOf="@id/v_img1"
+                android:orientation="vertical"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Botão Adicionar da Galeria -->
+            <LinearLayout
+                android:id="@+id/btn_adicionar_exercicio"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_topic_card"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginBottom="28dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_add_white"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Supino Reto"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Peito • Barra"
-                        android:textColor="#A0A0A0"
-                        android:textSize="12sp" />
-                </LinearLayout>
-                <!-- Botão remover -->
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_delete"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SÉRIES" android:textColor="#A0A0A0" android:textSize="10sp"/>
-                    <EditText android:layout_width="match_parent" android:layout_height="48dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="4" android:gravity="center" android:inputType="number" android:layout_marginTop="4dp" android:layout_marginEnd="4dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="REPS" android:textColor="#A0A0A0" android:textSize="10sp"/>
-                    <EditText android:layout_width="match_parent" android:layout_height="48dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="10" android:gravity="center" android:inputType="number" android:layout_marginTop="4dp" android:layout_marginHorizontal="2dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CARGA (KG)" android:textColor="#A0A0A0" android:textSize="10sp"/>
-                    <EditText android:layout_width="match_parent" android:layout_height="48dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="60" android:gravity="center" android:inputType="numberDecimal" android:layout_marginTop="4dp" android:layout_marginStart="4dp"/>
-                </LinearLayout>
+                    android:text="Adicionar da Galeria"
+                    android:textColor="#4CAF50"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-        </LinearLayout>
 
-        <!-- Exercício 2 (Estático) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_card_dark"
-            android:padding="16dp"
-            android:layout_marginBottom="32dp">
-            
-            <RelativeLayout
+            <!-- Botão Salvar Treino -->
+            <LinearLayout
+                android:id="@+id/btn_salvar_treino_criacao"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-                <View
-                    android:id="@+id/v_img2"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="#1C1A24"
-                    android:layout_marginEnd="16dp"/>
-                <LinearLayout
-                    android:layout_toEndOf="@id/v_img2"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_btn_green"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Crucifixo Inclinado"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Peito • Halteres"
-                        android:textColor="#A0A0A0"
-                        android:textSize="12sp" />
-                </LinearLayout>
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_delete"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SÉRIES" android:textColor="#A0A0A0" android:textSize="10sp"/>
-                    <EditText android:layout_width="match_parent" android:layout_height="48dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="3" android:gravity="center" android:inputType="number" android:layout_marginTop="4dp" android:layout_marginEnd="4dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="REPS" android:textColor="#A0A0A0" android:textSize="10sp"/>
-                    <EditText android:layout_width="match_parent" android:layout_height="48dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="12" android:gravity="center" android:inputType="number" android:layout_marginTop="4dp" android:layout_marginHorizontal="2dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CARGA (KG)" android:textColor="#A0A0A0" android:textSize="10sp"/>
-                    <EditText android:layout_width="match_parent" android:layout_height="48dp" android:background="#15131C" android:textColor="#FFFFFF" android:text="22" android:gravity="center" android:inputType="numberDecimal" android:layout_marginTop="4dp" android:layout_marginStart="4dp"/>
-                </LinearLayout>
+                    android:text="Salvar Treino"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
+
         </LinearLayout>
+    </ScrollView>
 
-        <Button
-            android:id="@+id/btn_salvar_treino_criacao"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Salvar Treino"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:background="@drawable/bg_btn_green"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:backgroundTint="@null"/>
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

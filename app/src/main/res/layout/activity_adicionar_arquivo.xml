@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#15131C">
+
+    <!-- Toolbar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#1C1A24"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <ImageView
+            android:id="@+id/iv_voltar_adicionar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:padding="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Adicionar Arquivo"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Tipo de Arquivo -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TIPO DE ARQUIVO"
+                android:textColor="#A0A0A0"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="14dp" />
+
+            <!-- Foto -->
+            <LinearLayout
+                android:id="@+id/card_tipo_foto"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/bg_topic_card"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_file_image" android:layout_marginEnd="16dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Foto" android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Vídeo -->
+            <LinearLayout
+                android:id="@+id/card_tipo_video"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/bg_topic_card"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_file_video" android:layout_marginEnd="16dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vídeo" android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Documento -->
+            <LinearLayout
+                android:id="@+id/card_tipo_documento"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/bg_topic_card"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="28dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/ic_file_text" android:layout_marginEnd="16dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Documento" android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Nome do arquivo -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOME DO ARQUIVO"
+                android:textColor="#A0A0A0"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_search_input"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:layout_marginBottom="24dp">
+
+                <EditText
+                    android:id="@+id/et_nome_arquivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Ex: Plano_Treino_A.pdf"
+                    android:textColorHint="#555555"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:background="@android:color/transparent"
+                    android:singleLine="true"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <!-- Área de upload -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_topic_card"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="32dp"
+                android:layout_marginBottom="24dp">
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/ic_cloud_upload"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selecionar Arquivo"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selecione o arquivo do seu dispositivo para iniciar o upload"
+                    android:textColor="#A0A0A0"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp" />
+
+                <LinearLayout
+                    android:id="@+id/btn_selecionar_arquivo"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_fab_green"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_add_white" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Botão Fazer Upload -->
+            <LinearLayout
+                android:id="@+id/btn_fazer_upload"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_btn_green"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fazer Upload"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

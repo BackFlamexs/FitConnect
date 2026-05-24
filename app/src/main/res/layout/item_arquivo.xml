@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_topic_card"
+    android:orientation="horizontal"
+    android:padding="14dp"
+    android:layout_marginBottom="10dp"
+    android:gravity="center_vertical">
+
+    <!-- Ícone do tipo -->
+    <LinearLayout
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_icon_topic"
+        android:gravity="center"
+        android:layout_marginEnd="14dp">
+
+        <ImageView
+            android:id="@+id/iv_tipo_arquivo"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_file_pdf" />
+
+    </LinearLayout>
+
+    <!-- Info do arquivo -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_nome_arquivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plano_Treino_A.pdf"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="middle"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tv_info_arquivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.2 MB · 10 Out, 2023"
+            android:textColor="#555555"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <!-- Botão deletar -->
+    <ImageView
+        android:id="@+id/iv_deletar_arquivo"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_delete_red"
+        android:layout_marginStart="8dp"
+        android:alpha="0.7" />
+
+</LinearLayout>

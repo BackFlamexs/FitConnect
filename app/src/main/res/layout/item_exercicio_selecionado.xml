@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_topic_card"
+    android:padding="16dp"
+    android:layout_marginBottom="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/iv_remover_exerc"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_nome_exerc_sel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_categ_exerc_sel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#A0A0A0"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_remover_exerc"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@android:drawable/ic_menu_delete"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="2dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SÉRIES"
+                android:textColor="#A0A0A0"
+                android:textSize="10sp" />
+
+            <EditText
+                android:id="@+id/et_series_exerc"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="#15131C"
+                android:textColor="#FFFFFF"
+                android:text="3"
+                android:gravity="center"
+                android:inputType="number"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REPS"
+                android:textColor="#A0A0A0"
+                android:textSize="10sp" />
+
+            <EditText
+                android:id="@+id/et_reps_exerc"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="#15131C"
+                android:textColor="#FFFFFF"
+                android:text="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="4dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

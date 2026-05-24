@@ -3,13 +3,40 @@ package com.example.fitconnect
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class HomeActivity : AppCompatActivity() {
+
+    private lateinit var tvTituloSequencia: TextView
+    private lateinit var tvBadgeDias: TextView
+
+    // Números padrão (circulo cinza)
+    private lateinit var tvNumSeg: TextView
+    private lateinit var tvNumTer: TextView
+    private lateinit var tvNumQua: TextView
+    private lateinit var tvNumQui: TextView
+    private lateinit var tvNumSex: TextView
+    private lateinit var tvNumSab: TextView
+    private lateinit var tvNumDom: TextView
+
+    // Checks verdes (aparece quando tem treino)
+    private lateinit var ivDiaSeg: ImageView
+    private lateinit var ivDiaTer: ImageView
+    private lateinit var ivDiaQua: ImageView
+    private lateinit var ivDiaQui: ImageView
+    private lateinit var ivDiaSex: ImageView
+    private lateinit var ivDiaSab: ImageView
+    private lateinit var ivDiaDom: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,55 +45,121 @@ class HomeActivity : AppCompatActivity() {
         val tvNomeUsuario = findViewById<TextView>(R.id.tv_nome_usuario_home)
         val fotoPerfil = findViewById<View>(R.id.v_profile_home)
 
-        // Cards principais
         val cardTreinos = findViewById<RelativeLayout>(R.id.card_treinos)
         val cardAjuda = findViewById<RelativeLayout>(R.id.card_ajuda)
         val cardMeusArquivos = findViewById<RelativeLayout>(R.id.card_meus_arquivos)
         val cardFeedbacks = findViewById<RelativeLayout>(R.id.card_feedbacks)
         val cardGaleria = findViewById<RelativeLayout>(R.id.card_galeria)
 
-        // Bottom nav
         val navInicio = findViewById<LinearLayout>(R.id.nav_inicio)
         val navGaleria = findViewById<LinearLayout>(R.id.nav_galeria)
         val navAjuda = findViewById<LinearLayout>(R.id.nav_ajuda)
         val navMenu = findViewById<LinearLayout>(R.id.nav_menu)
 
+        tvTituloSequencia = findViewById(R.id.tv_titulo_sequencia)
+        tvBadgeDias = findViewById(R.id.tv_badge_dias)
+
+        tvNumSeg = findViewById(R.id.tv_num_seg)
+        tvNumTer = findViewById(R.id.tv_num_ter)
+        tvNumQua = findViewById(R.id.tv_num_qua)
+        tvNumQui = findViewById(R.id.tv_num_qui)
+        tvNumSex = findViewById(R.id.tv_num_sex)
+        tvNumSab = findViewById(R.id.tv_num_sab)
+        tvNumDom = findViewById(R.id.tv_num_dom)
+
+        ivDiaSeg = findViewById(R.id.iv_dia_seg)
+        ivDiaTer = findViewById(R.id.iv_dia_ter)
+        ivDiaQua = findViewById(R.id.iv_dia_qua)
+        ivDiaQui = findViewById(R.id.iv_dia_qui)
+        ivDiaSex = findViewById(R.id.iv_dia_sex)
+        ivDiaSab = findViewById(R.id.iv_dia_sab)
+        ivDiaDom = findViewById(R.id.iv_dia_dom)
+
         val nomeLogado = intent.getStringExtra("NOME_USUARIO") ?: Sessao.obterNome(this)
         tvNomeUsuario.text = "Olá, $nomeLogado"
 
-        // Foto de perfil / bottom nav MENU → abre menu lateral
         fotoPerfil.setOnClickListener { abrirMenu(nomeLogado) }
         navMenu.setOnClickListener { abrirMenu(nomeLogado) }
+        navInicio.setOnClickListener { }
+        navGaleria.setOnClickListener { startActivity(Intent(this, GaleriaExerciciosActivity::class.java)) }
+        navAjuda.setOnClickListener { startActivity(Intent(this, AjudaActivity::class.java)) }
 
-        // Bottom nav INÍCIO → já está na home, não faz nada
-        navInicio.setOnClickListener { /* já está na tela inicial */ }
+        cardTreinos.setOnClickListener { startActivity(Intent(this, TreinosActivity::class.java)) }
+        cardAjuda.setOnClickListener { startActivity(Intent(this, AjudaActivity::class.java)) }
+        cardMeusArquivos.setOnClickListener { startActivity(Intent(this, MeusArquivosActivity::class.java)) }
+        cardFeedbacks.setOnClickListener { startActivity(Intent(this, HistoricoFeedbacksActivity::class.java)) }
+        cardGaleria.setOnClickListener { startActivity(Intent(this, GaleriaExerciciosActivity::class.java)) }
+    }
 
-        // Bottom nav GALERIA e AJUDA → em breve
-        navGaleria.setOnClickListener {
-            Toast.makeText(this, "Galeria — em breve", Toast.LENGTH_SHORT).show()
+    override fun onResume() {
+        super.onResume()
+        carregarSequenciaSemanal()
+    }
+
+    private fun carregarSequenciaSemanal() {
+        val usuarioId = Sessao.obterUsuarioId(this)
+        RetrofitClient.api.buscarFeedbacks("eq.$usuarioId").enqueue(object : Callback<List<FeedbackBanco>> {
+            override fun onResponse(call: Call<List<FeedbackBanco>>, response: Response<List<FeedbackBanco>>) {
+                if (response.isSuccessful) {
+                    atualizarSequencia(response.body() ?: emptyList())
+                }
+            }
+            override fun onFailure(call: Call<List<FeedbackBanco>>, t: Throwable) {}
+        })
+    }
+
+    private fun atualizarSequencia(feedbacks: List<FeedbackBanco>) {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        val hoje = Calendar.getInstance()
+        val diaSemanaHoje = hoje.get(Calendar.DAY_OF_WEEK)
+        val diasAteSegunda = if (diaSemanaHoje == Calendar.SUNDAY) 6 else diaSemanaHoje - Calendar.MONDAY
+        val inicioSemana = (hoje.clone() as Calendar).apply {
+            add(Calendar.DAY_OF_YEAR, -diasAteSegunda)
+            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
         }
-        navAjuda.setOnClickListener {
-            Toast.makeText(this, "Ajuda — em breve", Toast.LENGTH_SHORT).show()
+        val fimSemana = (inicioSemana.clone() as Calendar).apply {
+            add(Calendar.DAY_OF_YEAR, 6)
+            set(Calendar.HOUR_OF_DAY, 23); set(Calendar.MINUTE, 59); set(Calendar.SECOND, 59)
         }
 
-        // Card Treinos → abre lista de treinos
-        cardTreinos.setOnClickListener {
-            startActivity(Intent(this, TreinosActivity::class.java))
+        val diasFeitos = mutableSetOf<Int>()
+        for (f in feedbacks) {
+            try {
+                val data = sdf.parse(f.criado_em.take(10)) ?: continue
+                val cal = Calendar.getInstance().apply { time = data }
+                if (!cal.before(inicioSemana) && !cal.after(fimSemana)) {
+                    diasFeitos.add(cal.get(Calendar.DAY_OF_WEEK))
+                }
+            } catch (e: Exception) {}
         }
 
-        // Cards em desenvolvimento
-        cardAjuda.setOnClickListener {
-            Toast.makeText(this, "Ajuda — em breve", Toast.LENGTH_SHORT).show()
+        // Mapa: dia Calendar → par (número TextView, check ImageView)
+        val mapa = listOf(
+            Triple(Calendar.MONDAY,    tvNumSeg, ivDiaSeg),
+            Triple(Calendar.TUESDAY,   tvNumTer, ivDiaTer),
+            Triple(Calendar.WEDNESDAY, tvNumQua, ivDiaQua),
+            Triple(Calendar.THURSDAY,  tvNumQui, ivDiaQui),
+            Triple(Calendar.FRIDAY,    tvNumSex, ivDiaSex),
+            Triple(Calendar.SATURDAY,  tvNumSab, ivDiaSab),
+            Triple(Calendar.SUNDAY,    tvNumDom, ivDiaDom)
+        )
+        for ((dia, tvNum, ivCheck) in mapa) {
+            val feito = dia in diasFeitos
+            tvNum.visibility = if (feito) View.GONE else View.VISIBLE
+            ivCheck.visibility = if (feito) View.VISIBLE else View.GONE
         }
-        cardMeusArquivos.setOnClickListener {
-            Toast.makeText(this, "Meus Arquivos — em breve", Toast.LENGTH_SHORT).show()
-        }
-        cardFeedbacks.setOnClickListener {
-            Toast.makeText(this, "Feedbacks — em breve", Toast.LENGTH_SHORT).show()
-        }
-        cardGaleria.setOnClickListener {
-            Toast.makeText(this, "Galeria de Treinos — em breve", Toast.LENGTH_SHORT).show()
-        }
+
+        val count = diasFeitos.size
+        tvBadgeDias.text = "🔥 $count Dia${if (count != 1) "s" else ""}"
+
+        // Sequência = dias feitos sem intervalo entre eles
+        val ordemSemana = listOf(Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY,
+            Calendar.THURSDAY, Calendar.FRIDAY, Calendar.SATURDAY, Calendar.SUNDAY)
+        val indices = diasFeitos.map { ordemSemana.indexOf(it) }.sorted()
+        val isSequencia = count > 1 && indices.zipWithNext().all { (a, b) -> b == a + 1 }
+        tvTituloSequencia.text = if (isSequencia) "Sequência Semanal" else "Treinos Semanal"
     }
 
     private fun abrirMenu(nomeUsuario: String) {

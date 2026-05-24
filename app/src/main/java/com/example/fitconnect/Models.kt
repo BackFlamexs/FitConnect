@@ -39,6 +39,59 @@ data class UsuarioAtualizar(
     val senha: String
 )
 
+// Galeria de exercícios (catálogo global)
+data class GaleriaExercicioBanco(
+    val id: Int = 0,
+    val nome: String = "",
+    val categoria: String = "",
+    val dificuldade: String = "",
+    val equipamento: String = "",
+    val gif_url: String = "",
+    val instrucoes: String = ""
+)
+
+// Arquivos do usuário
+data class ArquivoBanco(
+    val id: Int = 0,
+    val usuario_id: Int = 0,
+    val nome: String = "",
+    val tipo: String = "",
+    val tamanho_kb: Int = 0,
+    val criado_em: String = ""
+)
+
+data class ArquivoCriacao(
+    val usuario_id: Int,
+    val nome: String,
+    val tipo: String,
+    val tamanho_kb: Int = 0
+)
+
+data class ExercicioCriacao(
+    val treino_id: Int,
+    val nome: String,
+    val series_reps: String
+)
+
+// Feedback pós-treino
+data class FeedbackBanco(
+    val id: Int = 0,
+    val usuario_id: Int = 0,
+    val treino_nome: String = "",
+    val intensidade: String = "",
+    val duracao_min: Int = 0,
+    val observacoes: String = "",
+    val criado_em: String = ""
+)
+
+data class FeedbackCriacao(
+    val usuario_id: Int,
+    val treino_nome: String,
+    val intensidade: String,
+    val duracao_min: Int,
+    val observacoes: String
+)
+
 // Sessão do usuário logado via SharedPreferences
 object Sessao {
     private const val PREFS = "fitconnect_sessao"
