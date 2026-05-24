@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MenuActivity : AppCompatActivity() {
@@ -46,13 +45,13 @@ class MenuActivity : AppCompatActivity() {
 
         // Em desenvolvimento
         llMeusArquivos.setOnClickListener {
-            Toast.makeText(this, "Meus Arquivos — em breve", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MeusArquivosActivity::class.java))
         }
         llFeedbacks.setOnClickListener {
-            Toast.makeText(this, "Feedbacks — em breve", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, HistoricoFeedbacksActivity::class.java))
         }
         llGaleria.setOnClickListener {
-            Toast.makeText(this, "Galeria de Treinos — em breve", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, GaleriaExerciciosActivity::class.java))
         }
 
         // Sair — limpa sessão e volta ao login

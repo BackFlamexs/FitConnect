@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#1C1A24">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_search_input"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:layout_marginBottom="12dp">
+
+        <EditText
+            android:id="@+id/et_busca_galeria_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Buscar exercício..."
+            android:textColorHint="#555555"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:background="@android:color/transparent"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_galeria_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:divider="#2A2836"
+        android:dividerHeight="1dp"
+        android:background="#1C1A24" />
+
+</LinearLayout>

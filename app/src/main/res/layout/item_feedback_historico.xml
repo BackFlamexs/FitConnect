@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_topic_card"
+    android:orientation="horizontal"
+    android:padding="14dp"
+    android:layout_marginBottom="12dp">
+
+    <!-- Ícone da intensidade -->
+    <LinearLayout
+        android:id="@+id/ll_icone_feedback"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_icon_topic"
+        android:gravity="center"
+        android:layout_marginEnd="12dp">
+
+        <ImageView
+            android:id="@+id/iv_icone_feedback"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_intensidade_intenso" />
+
+    </LinearLayout>
+
+    <!-- Conteúdo -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Nome + Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/tv_nome_treino"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Treino de Peito e Tríceps"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_badge_intensidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INTENSO"
+                android:textColor="#E53935"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_badge_intenso" />
+
+        </LinearLayout>
+
+        <!-- Data -->
+        <TextView
+            android:id="@+id/tv_data_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11 de Outubro, 20:01"
+            android:textColor="#555555"
+            android:textSize="11sp"
+            android:layout_marginBottom="6dp" />
+
+        <!-- Comentário -->
+        <TextView
+            android:id="@+id/tv_comentario_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="&quot;Senti que consegui aguentar a carga na última série.&quot;"
+            android:textColor="#A0A0A0"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+    </LinearLayout>
+
+</LinearLayout>

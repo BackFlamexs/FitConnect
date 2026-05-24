@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_topic_card"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:layout_marginBottom="10dp"
+    android:gravity="center_vertical"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Thumbnail -->
+    <FrameLayout
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="14dp">
+
+        <!-- GIF carregado via Glide (visível quando gif_url disponível) -->
+        <ImageView
+            android:id="@+id/iv_gif_exercicio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_icon_topic"
+            android:scaleType="centerCrop" />
+
+        <!-- Ícone padrão (visível quando sem GIF) -->
+        <ImageView
+            android:id="@+id/iv_icone_padrao"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_fitness_topic" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_play_circle"
+            android:layout_margin="2dp" />
+
+    </FrameLayout>
+
+    <!-- Info -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_nome_exercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supino Reto"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/tv_categoria_exercicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peito"
+                android:textColor="#4CAF50"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_pill_dark"
+                android:layout_marginEnd="8dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_dificuldade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Intermediário"
+            android:textColor="#A0A0A0"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_equipamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barra"
+            android:textColor="#666666"
+            android:textSize="11sp"
+            android:layout_marginTop="2dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
