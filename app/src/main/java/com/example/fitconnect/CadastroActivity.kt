@@ -59,7 +59,7 @@ class CadastroActivity : AppCompatActivity() {
             }
 
             // Estou mandando todos os dados para o Usuario para subir para o supabase
-            val novoUsuario = Usuario(nome, usuario, email, senha, telefone, generoSelecionado)
+            val novoUsuario = UsuarioCriacao(nome, usuario, email, senha, telefone, generoSelecionado)
 
             // 6. Estou enviando para a nuvem
             RetrofitClient.api.cadastrarUsuario(novoUsuario).enqueue(object : Callback<List<Usuario>> {
