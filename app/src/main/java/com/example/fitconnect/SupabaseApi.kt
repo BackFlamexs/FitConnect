@@ -15,7 +15,7 @@ interface SupabaseApi {
 
     @Headers("Prefer: return=representation")
     @POST("rest/v1/usuarios")
-    fun cadastrarUsuario(@Body usuario: Usuario): Call<List<Usuario>>
+    fun cadastrarUsuario(@Body usuario: UsuarioCriacao): Call<List<Usuario>>
 
     @GET("rest/v1/usuarios")
     fun fazerLogin(
