@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 class CadastroActivity : AppCompatActivity() {
 
@@ -30,8 +31,8 @@ class CadastroActivity : AppCompatActivity() {
             // Estou extraindo tudo aqui para poder fazer a logica
             val nome = campoNome.text.toString().trim()
             val usuario = campoUsuario.text.toString().trim()
-            val email = campoEmail.text.toString().trim()
-            val confirmaEmail = campoConfirmaEmail.text.toString().trim()
+            val email = campoEmail.text.toString().trim().lowercase(Locale.ROOT)
+            val confirmaEmail = campoConfirmaEmail.text.toString().trim().lowercase(Locale.ROOT)
             val senha = campoSenha.text.toString()
             val telefone = campoTelefone.text.toString().trim()
 

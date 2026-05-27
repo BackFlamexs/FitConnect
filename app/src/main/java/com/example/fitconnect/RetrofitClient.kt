@@ -19,7 +19,6 @@ object RetrofitClient {
             val request = chain.request().newBuilder()
                 .addHeader("apikey", SUPABASE_KEY)
                 .addHeader("Authorization", "Bearer $SUPABASE_KEY")
-                .addHeader("Content-Type", "application/json")
                 .build()
             chain.proceed(request)
         })

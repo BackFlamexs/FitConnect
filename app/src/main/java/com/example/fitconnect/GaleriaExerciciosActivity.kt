@@ -96,7 +96,7 @@ class GaleriaExerciciosActivity : AppCompatActivity() {
         navAjuda.setOnClickListener { startActivity(Intent(this, AjudaActivity::class.java)) }
         navMenu.setOnClickListener {
             val i = Intent(this, MenuActivity::class.java)
-            i.putExtra("NOME_USUARIO", Sessao.obterNome(this))
+            i.putExtra("NOME_USUARIO", Sessao.obterNomeUsuario(this))
             startActivity(i)
         }
 
@@ -107,7 +107,7 @@ class GaleriaExerciciosActivity : AppCompatActivity() {
         RetrofitClient.api.buscarGaleriaExercicios().enqueue(object : Callback<List<GaleriaExercicioBanco>> {
             override fun onResponse(call: Call<List<GaleriaExercicioBanco>>, response: Response<List<GaleriaExercicioBanco>>) {
                 if (response.isSuccessful) {
-                    todosExercicios = response.body() ?: emptyList()
+                    todosExercicios = removerDuplicados(response.body() ?: emptyList())
                     aplicarFiltro()
                 } else {
                     Toast.makeText(this@GaleriaExerciciosActivity,
@@ -119,6 +119,12 @@ class GaleriaExerciciosActivity : AppCompatActivity() {
                     "Sem conexão com o servidor", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun removerDuplicados(lista: List<GaleriaExercicioBanco>): List<GaleriaExercicioBanco> {
+        return lista
+            .filter { it.nome.isNotBlank() }
+            .distinctBy { it.nome.trim().lowercase() }
     }
 
     private fun aplicarFiltro() {

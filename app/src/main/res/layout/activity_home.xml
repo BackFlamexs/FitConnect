@@ -39,6 +39,7 @@
                         app:cardCornerRadius="26dp"
                         app:cardElevation="0dp">
                         <ImageView
+                            android:id="@+id/iv_foto_home"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
@@ -49,7 +50,7 @@
                         android:id="@+id/v_profile_home"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_circle_profile" />
+                        android:background="@android:color/transparent" />
                 </FrameLayout>
 
                 <LinearLayout

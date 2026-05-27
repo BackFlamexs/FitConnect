@@ -64,7 +64,7 @@ class AjudaActivity : AppCompatActivity() {
         navAjuda.setOnClickListener { /* já está na tela de ajuda */ }
         navMenu.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
-            intent.putExtra("NOME_USUARIO", Sessao.obterNome(this))
+            intent.putExtra("NOME_USUARIO", Sessao.obterNomeUsuario(this))
             startActivity(intent)
         }
     }

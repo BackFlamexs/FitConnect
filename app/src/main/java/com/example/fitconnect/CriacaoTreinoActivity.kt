@@ -107,13 +107,19 @@ class CriacaoTreinoActivity : AppCompatActivity() {
     private fun carregarGaleria() {
         RetrofitClient.api.buscarGaleriaExercicios().enqueue(object : Callback<List<GaleriaExercicioBanco>> {
             override fun onResponse(call: Call<List<GaleriaExercicioBanco>>, response: Response<List<GaleriaExercicioBanco>>) {
-                galeriaCache = response.body() ?: emptyList()
+                galeriaCache = removerDuplicados(response.body() ?: emptyList())
                 galeriaCarregada = true
             }
             override fun onFailure(call: Call<List<GaleriaExercicioBanco>>, t: Throwable) {
                 galeriaCarregada = true
             }
         })
+    }
+
+    private fun removerDuplicados(lista: List<GaleriaExercicioBanco>): List<GaleriaExercicioBanco> {
+        return lista
+            .filter { it.nome.isNotBlank() }
+            .distinctBy { it.nome.trim().lowercase() }
     }
 
     private fun mostrarDialogGaleria() {
@@ -167,15 +173,21 @@ class CriacaoTreinoActivity : AppCompatActivity() {
 
         listView.setOnItemClickListener { _, _, position, _ ->
             if (position < listaFiltrada.size) {
-                adicionarExercicio(listaFiltrada[position])
-                dialog.dismiss()
+                if (adicionarExercicio(listaFiltrada[position])) {
+                    dialog.dismiss()
+                }
             }
         }
 
         dialog.show()
     }
 
-    private fun adicionarExercicio(exercicio: GaleriaExercicioBanco) {
+    private fun adicionarExercicio(exercicio: GaleriaExercicioBanco): Boolean {
+        if (exercicioJaAdicionado(exercicio.nome)) {
+            Toast.makeText(this, "Exercício já adicionado.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
         val view = layoutInflater.inflate(R.layout.item_exercicio_selecionado, llContainer, false)
 
         view.findViewById<TextView>(R.id.tv_nome_exerc_sel).text = exercicio.nome
@@ -193,10 +205,25 @@ class CriacaoTreinoActivity : AppCompatActivity() {
 
         llContainer.addView(view)
         atualizarContador()
+        return true
     }
 
     private fun atualizarContador() {
         tvCount.text = "Exercícios (${llContainer.childCount})"
+    }
+
+    private fun exercicioJaAdicionado(nome: String): Boolean {
+        val chave = nome.trim().lowercase()
+        for (i in 0 until llContainer.childCount) {
+            val atual = llContainer.getChildAt(i)
+                .findViewById<TextView>(R.id.tv_nome_exerc_sel)
+                .text
+                .toString()
+                .trim()
+                .lowercase()
+            if (atual == chave) return true
+        }
+        return false
     }
 
     private fun salvarTreino(nome: String) {
@@ -237,6 +264,7 @@ class CriacaoTreinoActivity : AppCompatActivity() {
         for (i in 0 until llContainer.childCount) {
             val v = llContainer.getChildAt(i)
             val nome = v.findViewById<TextView>(R.id.tv_nome_exerc_sel).text.toString()
+            if (exerciciosList.any { it.nome.equals(nome, ignoreCase = true) }) continue
             val series = v.findViewById<EditText>(R.id.et_series_exerc).text.toString().trim().ifEmpty { "3" }
             val reps = v.findViewById<EditText>(R.id.et_reps_exerc).text.toString().trim().ifEmpty { "10" }
             exerciciosList.add(ExercicioCriacao(treino_id = treinoId, nome = nome, series_reps = "${series}x${reps}"))
