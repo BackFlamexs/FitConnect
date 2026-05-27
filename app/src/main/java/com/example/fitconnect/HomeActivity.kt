@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,6 +45,7 @@ class HomeActivity : AppCompatActivity() {
 
         val tvNomeUsuario = findViewById<TextView>(R.id.tv_nome_usuario_home)
         val fotoPerfil = findViewById<View>(R.id.v_profile_home)
+        val ivFotoHome = findViewById<ImageView>(R.id.iv_foto_home)
 
         val cardTreinos = findViewById<RelativeLayout>(R.id.card_treinos)
         val cardAjuda = findViewById<RelativeLayout>(R.id.card_ajuda)
@@ -75,8 +77,9 @@ class HomeActivity : AppCompatActivity() {
         ivDiaSab = findViewById(R.id.iv_dia_sab)
         ivDiaDom = findViewById(R.id.iv_dia_dom)
 
-        val nomeLogado = intent.getStringExtra("NOME_USUARIO") ?: Sessao.obterNome(this)
+        val nomeLogado = intent.getStringExtra("NOME_USUARIO") ?: Sessao.obterNomeUsuario(this)
         tvNomeUsuario.text = "Olá, $nomeLogado"
+        carregarFotoPerfil(ivFotoHome)
 
         fotoPerfil.setOnClickListener { abrirMenu(nomeLogado) }
         navMenu.setOnClickListener { abrirMenu(nomeLogado) }
@@ -93,7 +96,22 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        carregarFotoPerfil(findViewById(R.id.iv_foto_home))
         carregarSequenciaSemanal()
+    }
+
+    private fun carregarFotoPerfil(ivFoto: ImageView) {
+        val fotoUrl = Sessao.obterFotoUrl(this)
+        if (fotoUrl.isNotEmpty()) {
+            Glide.with(this)
+                .load(fotoUrl)
+                .centerCrop()
+                .placeholder(R.drawable.img_avatar)
+                .error(R.drawable.img_avatar)
+                .into(ivFoto)
+        } else {
+            ivFoto.setImageResource(R.drawable.img_avatar)
+        }
     }
 
     private fun carregarSequenciaSemanal() {
@@ -164,7 +182,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun abrirMenu(nomeUsuario: String) {
         val intent = Intent(this, MenuActivity::class.java)
-        intent.putExtra("NOME_USUARIO", nomeUsuario)
+        intent.putExtra("NOME_USUARIO", Sessao.obterNomeUsuario(this))
         startActivity(intent)
     }
 }

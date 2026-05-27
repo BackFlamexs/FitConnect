@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#15131C">
@@ -78,6 +79,7 @@
 
         <!-- Foto de Perfil Central -->
         <LinearLayout
+            android:id="@+id/ll_alterar_foto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -87,11 +89,22 @@
             <RelativeLayout
                 android:layout_width="100dp"
                 android:layout_height="100dp">
-                
-                <View
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_circle_empty"/>
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
+
+                    <ImageView
+                        android:id="@+id/iv_foto_perfil_editar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_circle_empty"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_avatar"/>
+                </androidx.cardview.widget.CardView>
                     
                 <ImageView
                     android:layout_width="28dp"
@@ -106,6 +119,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_alterar_foto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Alterar foto de perfil"
@@ -130,6 +144,24 @@
             android:paddingHorizontal="16dp"
             android:textColor="#FFFFFF"
             android:hint="Vitor Gomes"
+            android:textColorHint="#A0A0A0"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NOME QUE DESEJA SER CHAMADO"
+            android:textColor="#A0A0A0"
+            android:textSize="12sp"
+            android:layout_marginBottom="8dp"/>
+        <EditText
+            android:id="@+id/et_nome_usuario_editar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_input_dark"
+            android:paddingHorizontal="16dp"
+            android:textColor="#FFFFFF"
+            android:hint="Vitor"
             android:textColorHint="#A0A0A0"
             android:layout_marginBottom="24dp"/>
 

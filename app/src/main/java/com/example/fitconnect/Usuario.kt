@@ -10,11 +10,14 @@ data class UsuarioCriacao(
 )
 
 data class Usuario(
-    val nome_completo: String,
-    val nome_usuario: String,
-    val email: String,
-    val senha: String,
-    val telefone: String,
-    val genero: String,
-    val id: Int = 0
+    val nome_completo: String? = "",
+    val nome_usuario: String? = "",
+    val email: String? = "",
+    val senha: String? = "",
+    val telefone: String? = "",
+    val genero: String? = "",
+    val id: Int = 0,
+    val foto_url: String? = "",
+    val peso: Double? = null,
+    val altura: Int? = null
 )

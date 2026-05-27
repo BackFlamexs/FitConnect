@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         botaoEntrar.setOnClickListener {
-            val emailDigitado = campoEmail.text.toString().trim()
+            val emailDigitado = campoEmail.text.toString().trim().lowercase(Locale.ROOT)
             val senhaDigitada = campoSenha.text.toString()
 
             if (emailDigitado.isEmpty() || senhaDigitada.isEmpty()) {
@@ -48,12 +49,28 @@ class MainActivity : AppCompatActivity() {
                             val lista = response.body()
                             if (!lista.isNullOrEmpty()) {
                                 val usuario = lista[0]
+                                val nomeCompleto = usuario.nome_completo.orEmpty().ifEmpty { "Atleta" }
+                                val nomeUsuario = usuario.nome_usuario.orEmpty().ifEmpty { nomeCompleto }
+                                val emailUsuario = usuario.email.orEmpty().ifEmpty { emailDigitado }
+                                val fotoUrl = usuario.foto_url.orEmpty().ifEmpty {
+                                    Sessao.obterFotoUrl(this@MainActivity)
+                                }
+                                val peso = usuario.peso ?: Sessao.obterPeso(this@MainActivity)
+                                val altura = usuario.altura ?: Sessao.obterAltura(this@MainActivity)
 
-                                // Salva sessão para uso em qualquer tela
-                                Sessao.salvar(this@MainActivity, usuario.email, usuario.id, usuario.nome_completo)
+                                Sessao.salvar(
+                                    this@MainActivity,
+                                    emailUsuario,
+                                    usuario.id,
+                                    nomeCompleto,
+                                    fotoUrl,
+                                    nomeUsuario,
+                                    peso,
+                                    altura
+                                )
 
                                 val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                                intent.putExtra("NOME_USUARIO", usuario.nome_completo)
+                                intent.putExtra("NOME_USUARIO", nomeUsuario)
                                 startActivity(intent)
                                 finish()
                             } else {
@@ -65,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<List<Usuario>>, t: Throwable) {
-                        Toast.makeText(this@MainActivity, "Falha na conexão: ${t.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity, "Falha na conexao: ${t.message}", Toast.LENGTH_LONG).show()
                     }
                 })
         }

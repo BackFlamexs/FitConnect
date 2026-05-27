@@ -91,7 +91,7 @@ class MeusArquivosActivity : AppCompatActivity() {
         navAjuda.setOnClickListener { startActivity(Intent(this, AjudaActivity::class.java)) }
         navMenu.setOnClickListener {
             val i = Intent(this, MenuActivity::class.java)
-            i.putExtra("NOME_USUARIO", Sessao.obterNome(this))
+            i.putExtra("NOME_USUARIO", Sessao.obterNomeUsuario(this))
             startActivity(i)
         }
     }

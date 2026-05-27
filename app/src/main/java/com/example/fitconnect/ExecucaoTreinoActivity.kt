@@ -49,10 +49,9 @@ class ExecucaoTreinoActivity : AppCompatActivity() {
 
         btnFinalizar.setOnClickListener {
             timerRunning = false
-            val duracaoMin = secondsElapsed / 60
             val intent = Intent(this, FeedbackPosTreinoActivity::class.java).apply {
                 putExtra("NOME_TREINO", nomeTreino)
-                putExtra("DURACAO_MIN", duracaoMin)
+                putExtra("DURACAO_SEG", secondsElapsed)
             }
             startActivity(intent)
             finish()

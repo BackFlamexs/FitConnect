@@ -55,6 +55,9 @@ class TreinoAdapter(
                         val intent = Intent(ctx, EditarTreinoActivity::class.java)
                         intent.putExtra("TREINO_ID", treino.id)
                         intent.putExtra("NOME_TREINO", treino.nome)
+                        intent.putExtra("TAG_DIA", treino.tagDia)
+                        intent.putExtra("DIA_SEMANA", treino.diaSemana)
+                        intent.putExtra("DETALHES_TREINO", treino.detalhes)
                         ctx.startActivity(intent)
                         true
                     }

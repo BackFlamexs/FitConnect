@@ -26,7 +26,7 @@ interface SupabaseApi {
     @Headers("Prefer: return=minimal")
     @PATCH("rest/v1/usuarios")
     fun atualizarUsuario(
-        @Query("email") email: String,
+        @Query("id") id: String,
         @Body dados: UsuarioAtualizar
     ): Call<Void>
 

@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 
 class MenuActivity : AppCompatActivity() {
 
@@ -23,9 +24,19 @@ class MenuActivity : AppCompatActivity() {
         val btnSair = findViewById<Button>(R.id.btn_sair_menu)
         val tvNomeUsuario = findViewById<TextView>(R.id.tv_nome_usuario_menu)
         val vFecharMenu = findViewById<android.view.View>(R.id.v_fechar_menu)
+        val ivFotoMenu = findViewById<ImageView>(R.id.iv_foto_menu)
 
-        val nomeUsuario = intent.getStringExtra("NOME_USUARIO") ?: Sessao.obterNome(this)
+        val nomeUsuario = intent.getStringExtra("NOME_USUARIO") ?: Sessao.obterNomeUsuario(this)
         tvNomeUsuario.text = nomeUsuario
+        val fotoUrl = Sessao.obterFotoUrl(this)
+        if (fotoUrl.isNotEmpty()) {
+            Glide.with(this)
+                .load(fotoUrl)
+                .centerCrop()
+                .placeholder(R.drawable.img_avatar)
+                .error(R.drawable.img_avatar)
+                .into(ivFotoMenu)
+        }
 
         // Fechar menu clicando na área escura da direita
         vFecharMenu.setOnClickListener { finish() }

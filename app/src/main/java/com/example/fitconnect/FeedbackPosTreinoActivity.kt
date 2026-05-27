@@ -24,7 +24,8 @@ class FeedbackPosTreinoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feedback_pos_treino)
 
         val nomeTreino = intent.getStringExtra("NOME_TREINO") ?: "Treino"
-        val duracaoMin = intent.getIntExtra("DURACAO_MIN", 0)
+        val duracaoSeg = intent.getIntExtra("DURACAO_SEG", 0)
+        val duracaoMin = ((duracaoSeg + 59) / 60).coerceAtLeast(1)
 
         val ivVoltar = findViewById<ImageView>(R.id.iv_voltar_feedback)
         val tvCancelar = findViewById<TextView>(R.id.tv_cancelar)
@@ -44,8 +45,9 @@ class FeedbackPosTreinoActivity : AppCompatActivity() {
         val icModerado = findViewById<ImageView>(R.id.ic_moderado)
         val icIntenso = findViewById<ImageView>(R.id.ic_intenso)
 
-        tvNome.text = "Registre a intensidade de \"$nomeTreino\" para acompanhar sua próxima sessão."
-        etDuracao.setText(if (duracaoMin > 0) duracaoMin.toString() else "")
+        tvNome.text = "Treino \"$nomeTreino\" finalizado em ${formatarDuracao(duracaoSeg)}. Registre a intensidade para acompanhar sua próxima sessão."
+        etDuracao.setText(duracaoMin.toString())
+        etDuracao.isEnabled = false
 
         // Selecionar Moderado por padrão
         selecionarIntensidade(cardModerado, tvModerado, icModerado,
@@ -94,6 +96,13 @@ class FeedbackPosTreinoActivity : AppCompatActivity() {
         cardsOff.forEach { it.setBackgroundResource(R.drawable.bg_topic_card) }
         tvsOff.forEach { it.setTextColor(0xFFA0A0A0.toInt()) }
         icsOff.forEach { it.clearColorFilter() }
+    }
+
+    private fun formatarDuracao(segundos: Int): String {
+        val total = segundos.coerceAtLeast(0)
+        val minutos = total / 60
+        val seg = total % 60
+        return if (minutos > 0) "${minutos}min ${seg}s" else "${seg}s"
     }
 
     private fun enviarFeedback(nomeTreino: String, etDuracao: EditText, etObs: EditText) {
