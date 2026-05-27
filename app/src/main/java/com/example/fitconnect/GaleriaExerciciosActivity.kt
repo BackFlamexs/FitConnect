@@ -46,7 +46,17 @@ class GaleriaExerciciosActivity : AppCompatActivity() {
         val navAjuda = findViewById<LinearLayout>(R.id.nav_ajuda)
         val navMenu = findViewById<LinearLayout>(R.id.nav_menu)
 
-        adapter = ExercicioGaleriaAdapter(emptyList())
+        adapter = ExercicioGaleriaAdapter(emptyList()) { exercicio ->
+            val intent = Intent(this, DetalheGaleriaExercicioActivity::class.java).apply {
+                putExtra("EXERCICIO_NOME", exercicio.nome)
+                putExtra("EXERCICIO_CATEGORIA", exercicio.categoria)
+                putExtra("EXERCICIO_DIFICULDADE", exercicio.dificuldade)
+                putExtra("EXERCICIO_EQUIPAMENTO", exercicio.equipamento)
+                putExtra("EXERCICIO_GIF_URL", exercicio.gif_url)
+                putExtra("EXERCICIO_INSTRUCOES", exercicio.instrucoes)
+            }
+            startActivity(intent)
+        }
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = adapter
 

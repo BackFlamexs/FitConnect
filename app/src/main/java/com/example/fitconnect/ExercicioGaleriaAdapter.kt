@@ -7,9 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-class ExercicioGaleriaAdapter(private var lista: List<GaleriaExercicioBanco>) :
-    RecyclerView.Adapter<ExercicioGaleriaAdapter.VH>() {
+class ExercicioGaleriaAdapter(
+    private var lista: List<GaleriaExercicioBanco>,
+    private val onItemClick: (GaleriaExercicioBanco) -> Unit = {}
+) : RecyclerView.Adapter<ExercicioGaleriaAdapter.VH>() {
 
     inner class VH(view: View) : RecyclerView.ViewHolder(view) {
         val tvNome: TextView = view.findViewById(R.id.tv_nome_exercicio)
@@ -33,10 +36,13 @@ class ExercicioGaleriaAdapter(private var lista: List<GaleriaExercicioBanco>) :
         holder.tvDificuldade.text = ex.dificuldade
         holder.tvEquipamento.text = ex.equipamento
 
+        holder.itemView.setOnClickListener { onItemClick(ex) }
+
         if (ex.gif_url.isNotEmpty()) {
             holder.ivIconePadrao.visibility = View.GONE
             Glide.with(holder.ivGif.context)
                 .load(ex.gif_url)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .placeholder(R.drawable.ic_fitness_topic)
                 .error(R.drawable.ic_fitness_topic)
                 .into(holder.ivGif)

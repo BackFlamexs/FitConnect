@@ -37,6 +37,7 @@
         <activity android:name=".FeedbackPosTreinoActivity" android:exported="false" />
         <activity android:name=".HistoricoFeedbacksActivity" android:exported="false" />
         <activity android:name=".GaleriaExerciciosActivity" android:exported="false" />
+        <activity android:name=".DetalheGaleriaExercicioActivity" android:exported="false" />
         <activity android:name=".MeusArquivosActivity" android:exported="false" />
         <activity android:name=".AdicionarArquivoActivity" android:exported="false" />
 
