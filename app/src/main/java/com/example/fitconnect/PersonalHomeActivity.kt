@@ -28,6 +28,7 @@ class PersonalHomeActivity : AppCompatActivity() {
     private lateinit var tvAlunosVazio: TextView
     private lateinit var tvDadosAluno: TextView
     private lateinit var tvImcAluno: TextView
+    private lateinit var tvBiografiaAluno: TextView
     private lateinit var tvResumoTreinosAluno: TextView
     private lateinit var resumoTreinosAdapter: ResumoTreinoAlunoAdapter
     private lateinit var rvResumoTreinosAluno: RecyclerView
@@ -46,6 +47,7 @@ class PersonalHomeActivity : AppCompatActivity() {
         tvAlunosVazio = findViewById(R.id.tv_alunos_vazio)
         tvDadosAluno = findViewById(R.id.tv_dados_aluno_personal)
         tvImcAluno = findViewById(R.id.tv_imc_aluno_personal)
+        tvBiografiaAluno = findViewById(R.id.tv_biografia_aluno_personal)
         tvResumoTreinosAluno = findViewById(R.id.tv_resumo_treinos_aluno)
         rvResumoTreinosAluno = findViewById(R.id.rv_resumo_treinos_aluno)
 
@@ -226,6 +228,7 @@ class PersonalHomeActivity : AppCompatActivity() {
     private fun limparDadosAluno() {
         tvDadosAluno.text = "Selecione um aluno para visualizar nascimento, peso, altura e IMC."
         tvImcAluno.text = "IMC: --"
+        tvBiografiaAluno.text = "Selecione um aluno para visualizar observacoes importantes."
         tvResumoTreinosAluno.text = "Selecione um aluno para visualizar os treinos da semana."
         tvResumoTreinosAluno.visibility = View.VISIBLE
         rvResumoTreinosAluno.visibility = View.GONE
@@ -237,10 +240,14 @@ class PersonalHomeActivity : AppCompatActivity() {
         val peso = aluno?.peso
         val alturaCm = aluno?.altura
         val nascimentoTexto = formatarNascimento(aluno?.data_nascimento.orEmpty())
+        val biografia = aluno?.biografia.orEmpty().trim()
 
         val pesoTexto = peso?.let { "${"%.1f".format(Locale.US, it)} kg" } ?: "Nao informado"
         val alturaTexto = alturaCm?.let { "$it cm" } ?: "Nao informada"
         tvDadosAluno.text = "Nascimento: $nascimentoTexto\nPeso: $pesoTexto\nAltura: $alturaTexto"
+        tvBiografiaAluno.text = biografia.ifEmpty {
+            "Aluno ainda nao preencheu a biografia."
+        }
 
         val imc = if (peso != null && peso > 0.0 && alturaCm != null && alturaCm > 0) {
             val alturaM = alturaCm / 100.0

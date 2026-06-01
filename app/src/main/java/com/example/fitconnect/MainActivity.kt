@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
                                 val altura = usuario.altura ?: Sessao.obterAltura(this@MainActivity)
                                 val accountType = usuario.account_type.orEmpty().ifEmpty { tipoConta }
                                 val dataNascimento = usuario.data_nascimento.orEmpty()
+                                val biografia = usuario.biografia.orEmpty()
 
                                 Sessao.salvar(
                                     this@MainActivity,
@@ -92,7 +93,8 @@ class MainActivity : AppCompatActivity() {
                                     peso,
                                     altura,
                                     accountType,
-                                    dataNascimento
+                                    dataNascimento,
+                                    biografia
                                 )
 
                                 val destino = if (accountType == "personal") {

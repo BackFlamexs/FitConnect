@@ -5,6 +5,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.Base64
 import android.util.Patterns
 import android.view.View
@@ -27,6 +30,7 @@ import java.util.Locale
 
 class EditarPerfilActivity : AppCompatActivity() {
 
+    private val maxBiografiaChars = 1000
     private var fotoSelecionadaUri: Uri? = null
     private lateinit var ivFotoPerfil: ImageView
     private lateinit var btnSalvar: Button
@@ -51,6 +55,8 @@ class EditarPerfilActivity : AppCompatActivity() {
         val etNomeUsuario = findViewById<EditText>(R.id.et_nome_usuario_editar)
         val etEmail = findViewById<EditText>(R.id.et_email_editar)
         val etSenha = findViewById<EditText>(R.id.et_senha_editar)
+        val etBiografia = findViewById<EditText>(R.id.et_biografia_editar)
+        val tvContadorBiografia = findViewById<TextView>(R.id.tv_contador_biografia_editar)
         val etDataNascimento = findViewById<EditText>(R.id.et_data_nascimento_editar)
         val etPeso = findViewById<EditText>(R.id.et_peso_editar)
         val etAltura = findViewById<EditText>(R.id.et_altura_editar)
@@ -64,6 +70,9 @@ class EditarPerfilActivity : AppCompatActivity() {
         etNome.setText(Sessao.obterNome(this))
         etNomeUsuario.setText(Sessao.obterNomeUsuario(this))
         etEmail.setText(Sessao.obterEmail(this))
+        etBiografia.filters = arrayOf(InputFilter.LengthFilter(maxBiografiaChars))
+        etBiografia.setText(Sessao.obterBiografia(this))
+        atualizarContadorBiografia(etBiografia, tvContadorBiografia)
         val dataNascimentoAtual = Sessao.obterDataNascimento(this)
         if (dataNascimentoAtual.isNotBlank()) {
             etDataNascimento.setText(formatarDataTela(dataNascimentoAtual))
@@ -75,6 +84,13 @@ class EditarPerfilActivity : AppCompatActivity() {
 
         btnVoltar.setOnClickListener { finish() }
         etDataNascimento.setOnClickListener { mostrarSeletorData(etDataNascimento) }
+        etBiografia.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                atualizarContadorBiografia(etBiografia, tvContadorBiografia)
+            }
+        })
         llAlterarFoto.setOnClickListener { seletorFoto.launch("image/*") }
         tvAlterarFoto.setOnClickListener { seletorFoto.launch("image/*") }
 
@@ -83,6 +99,7 @@ class EditarPerfilActivity : AppCompatActivity() {
             val nomeUsuario = etNomeUsuario.text.toString().trim()
             val email = etEmail.text.toString().trim().lowercase(Locale.ROOT)
             val senha = etSenha.text.toString()
+            val biografia = etBiografia.text.toString().trim()
             val dataNascimento = etDataNascimento.tag as? String ?: Sessao.obterDataNascimento(this)
             val peso = etPeso.text.toString().trim().replace(",", ".").toDoubleOrNull()
             val altura = etAltura.text.toString().trim().toIntOrNull()
@@ -117,10 +134,10 @@ class EditarPerfilActivity : AppCompatActivity() {
             val uri = fotoSelecionadaUri
             if (uri != null) {
                 enviarFoto(uri, usuarioId) { fotoUrl ->
-                    salvarPerfil(usuarioId, nome, nomeUsuario, email, senha, fotoUrl, peso, altura, dataNascimento, llSucesso)
+                    salvarPerfil(usuarioId, nome, nomeUsuario, email, senha, fotoUrl, peso, altura, dataNascimento, biografia, llSucesso)
                 }
             } else {
-                salvarPerfil(usuarioId, nome, nomeUsuario, email, senha, Sessao.obterFotoUrl(this), peso, altura, dataNascimento, llSucesso)
+                salvarPerfil(usuarioId, nome, nomeUsuario, email, senha, Sessao.obterFotoUrl(this), peso, altura, dataNascimento, biografia, llSucesso)
             }
         }
     }
@@ -159,6 +176,7 @@ class EditarPerfilActivity : AppCompatActivity() {
         peso: Double?,
         altura: Int?,
         dataNascimento: String,
+        biografia: String,
         llSucesso: LinearLayout
     ) {
         val dadosAtualizados = UsuarioAtualizar(
@@ -169,7 +187,8 @@ class EditarPerfilActivity : AppCompatActivity() {
             foto_url = fotoUrl.ifEmpty { null },
             peso = peso,
             altura = altura,
-            data_nascimento = dataNascimento.ifEmpty { null }
+            data_nascimento = dataNascimento.ifEmpty { null },
+            biografia = biografia.ifEmpty { null }
         )
 
         RetrofitClient.api.atualizarUsuario("eq.$usuarioId", dadosAtualizados)
@@ -187,7 +206,8 @@ class EditarPerfilActivity : AppCompatActivity() {
                             peso,
                             altura,
                             Sessao.obterAccountType(this@EditarPerfilActivity),
-                            dataNascimento
+                            dataNascimento,
+                            biografia
                         )
                         fotoSelecionadaUri = null
                         llSucesso.visibility = View.VISIBLE
@@ -255,5 +275,9 @@ class EditarPerfilActivity : AppCompatActivity() {
     private fun formatarDataTela(dataBanco: String): String {
         val partes = dataBanco.take(10).split("-")
         return if (partes.size == 3) "${partes[2]}/${partes[1]}/${partes[0]}" else dataBanco
+    }
+
+    private fun atualizarContadorBiografia(campo: EditText, contador: TextView) {
+        contador.text = "${campo.text.length}/$maxBiografiaChars"
     }
 }

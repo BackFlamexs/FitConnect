@@ -23,5 +23,6 @@ data class Usuario(
     val peso: Double? = null,
     val altura: Int? = null,
     val account_type: String? = "student",
-    val data_nascimento: String? = null
+    val data_nascimento: String? = null,
+    val biografia: String? = null
 )

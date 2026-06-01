@@ -45,7 +45,8 @@ data class UsuarioAtualizar(
     val foto_url: String? = null,
     val peso: Double? = null,
     val altura: Int? = null,
-    val data_nascimento: String? = null
+    val data_nascimento: String? = null,
+    val biografia: String? = null
 )
 
 // Galeria de exercícios (catálogo global)
@@ -135,7 +136,8 @@ object Sessao {
         peso: Double? = null,
         altura: Int? = null,
         accountType: String = "student",
-        dataNascimento: String? = null
+        dataNascimento: String? = null,
+        biografia: String? = null
     ) {
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
             .putString("email", email)
@@ -147,6 +149,7 @@ object Sessao {
             .putInt("altura", altura ?: 0)
             .putString("account_type", accountType)
             .putString("data_nascimento", dataNascimento.orEmpty())
+            .putString("biografia", biografia.orEmpty())
             .apply()
     }
 
@@ -180,6 +183,9 @@ object Sessao {
 
     fun obterDataNascimento(context: Context): String =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString("data_nascimento", "") ?: ""
+
+    fun obterBiografia(context: Context): String =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString("biografia", "") ?: ""
 
     fun limpar(context: Context) =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().clear().apply()

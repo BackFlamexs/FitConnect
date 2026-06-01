@@ -148,6 +148,34 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/area_biografia_aluno_personal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_card_dark"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Biografia do aluno"
+                android:textColor="@color/fit_text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_biografia_aluno_personal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="3dp"
+                android:text="Selecione um aluno para visualizar observacoes importantes."
+                android:textColor="@color/fit_text_secondary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/area_resumo_treinos_aluno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

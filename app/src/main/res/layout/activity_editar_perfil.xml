@@ -203,6 +203,47 @@
             android:textColorHint="#A0A0A0"
             android:layout_marginBottom="48dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biografia"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
+            android:text="Descreva restricoes, dores, lesoes, objetivos e observacoes importantes para o personal."
+            android:textColor="#A0A0A0"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/et_biografia_editar"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_input_dark"
+            android:gravity="top|start"
+            android:hint="Ex: tenho dor no joelho direito, objetivo hipertrofia, evito impacto..."
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLines="8"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#A0A0A0" />
+
+        <TextView
+            android:id="@+id/tv_contador_biografia_editar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:gravity="end"
+            android:text="0/1000"
+            android:textColor="#A0A0A0"
+            android:textSize="12sp" />
+
         <!-- Informações Físicas -->
         <TextView
             android:layout_width="wrap_content"
