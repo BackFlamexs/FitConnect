@@ -193,6 +193,7 @@
 
         <!-- PRO Banner -->
         <LinearLayout
+            android:id="@+id/ll_fitconnect_pro_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_pro_banner"
@@ -217,13 +218,16 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <Button
+                android:id="@+id/btn_atualizar_pro_menu"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
                 android:text="ATUALIZAR AGORA"
-                android:textColor="#4CAF50"
+                android:textColor="#FFFFFF"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:background="@drawable/bg_btn_green"
+                app:backgroundTint="@null" />
         </LinearLayout>
 
         <!-- Botão Sair -->

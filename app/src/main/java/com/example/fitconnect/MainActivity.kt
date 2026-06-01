@@ -21,11 +21,28 @@ class MainActivity : AppCompatActivity() {
         val campoEmail = findViewById<EditText>(R.id.et_email)
         val campoSenha = findViewById<EditText>(R.id.et_password)
         val botaoEntrar = findViewById<Button>(R.id.btn_login)
+        val botaoAluno = findViewById<Button>(R.id.btn_tipo_aluno)
+        val botaoPersonal = findViewById<Button>(R.id.btn_tipo_personal)
         val textoCadastreSe = findViewById<TextView>(R.id.tv_sign_up)
         val textoEsqueciSenha = findViewById<TextView>(R.id.tv_forgot_password)
+        var tipoContaSelecionado: String? = null
+
+        fun selecionarTipoConta(tipo: String) {
+            tipoContaSelecionado = tipo
+            val alunoSelecionado = tipo == "student"
+            botaoAluno.setBackgroundResource(if (alunoSelecionado) R.drawable.bg_btn_green else R.drawable.bg_btn_green_outline)
+            botaoPersonal.setBackgroundResource(if (alunoSelecionado) R.drawable.bg_btn_green_outline else R.drawable.bg_btn_green)
+            botaoAluno.setTextColor(if (alunoSelecionado) 0xFFFFFFFF.toInt() else 0xFF4CAF50.toInt())
+            botaoPersonal.setTextColor(if (alunoSelecionado) 0xFF4CAF50.toInt() else 0xFFFFFFFF.toInt())
+        }
+
+        botaoAluno.setOnClickListener { selecionarTipoConta("student") }
+        botaoPersonal.setOnClickListener { selecionarTipoConta("personal") }
 
         textoCadastreSe.setOnClickListener {
-            startActivity(Intent(this, CadastroActivity::class.java))
+            val intent = Intent(this, CadastroActivity::class.java)
+            tipoContaSelecionado?.let { intent.putExtra("ACCOUNT_TYPE", it) }
+            startActivity(intent)
         }
 
         textoEsqueciSenha.setOnClickListener {
@@ -35,13 +52,18 @@ class MainActivity : AppCompatActivity() {
         botaoEntrar.setOnClickListener {
             val emailDigitado = campoEmail.text.toString().trim().lowercase(Locale.ROOT)
             val senhaDigitada = campoSenha.text.toString()
+            val tipoConta = tipoContaSelecionado
 
             if (emailDigitado.isEmpty() || senhaDigitada.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (tipoConta == null) {
+                Toast.makeText(this, "Escolha se voce e Aluno ou Personal Trainer.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            RetrofitClient.api.fazerLogin("eq.$emailDigitado", "eq.$senhaDigitada")
+            RetrofitClient.api.fazerLogin("eq.$emailDigitado", "eq.$senhaDigitada", "eq.$tipoConta")
                 .enqueue(object : Callback<List<Usuario>> {
 
                     override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
@@ -57,6 +79,8 @@ class MainActivity : AppCompatActivity() {
                                 }
                                 val peso = usuario.peso ?: Sessao.obterPeso(this@MainActivity)
                                 val altura = usuario.altura ?: Sessao.obterAltura(this@MainActivity)
+                                val accountType = usuario.account_type.orEmpty().ifEmpty { tipoConta }
+                                val dataNascimento = usuario.data_nascimento.orEmpty()
 
                                 Sessao.salvar(
                                     this@MainActivity,
@@ -66,15 +90,22 @@ class MainActivity : AppCompatActivity() {
                                     fotoUrl,
                                     nomeUsuario,
                                     peso,
-                                    altura
+                                    altura,
+                                    accountType,
+                                    dataNascimento
                                 )
 
-                                val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                                val destino = if (accountType == "personal") {
+                                    PersonalHomeActivity::class.java
+                                } else {
+                                    HomeActivity::class.java
+                                }
+                                val intent = Intent(this@MainActivity, destino)
                                 intent.putExtra("NOME_USUARIO", nomeUsuario)
                                 startActivity(intent)
                                 finish()
                             } else {
-                                Toast.makeText(this@MainActivity, "E-mail ou senha incorretos.", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@MainActivity, "E-mail, senha ou tipo de conta incorretos.", Toast.LENGTH_LONG).show()
                             }
                         } else {
                             Toast.makeText(this@MainActivity, "Erro no servidor: ${response.code()}", Toast.LENGTH_LONG).show()

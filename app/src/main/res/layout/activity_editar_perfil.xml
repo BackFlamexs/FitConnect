@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sv_editar_perfil"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -217,6 +218,28 @@
             android:textColor="#A0A0A0"
             android:textSize="12sp"
             android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DATA DE NASCIMENTO"
+            android:textColor="#A0A0A0"
+            android:textSize="12sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/et_data_nascimento_editar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_input_dark"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="dd/mm/aaaa"
+            android:inputType="none"
+            android:paddingHorizontal="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#A0A0A0"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.example.fitconnect
 
+import android.app.DatePickerDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -11,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,6 +22,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
+import java.util.Calendar
 import java.util.Locale
 
 class EditarPerfilActivity : AppCompatActivity() {
@@ -48,6 +51,7 @@ class EditarPerfilActivity : AppCompatActivity() {
         val etNomeUsuario = findViewById<EditText>(R.id.et_nome_usuario_editar)
         val etEmail = findViewById<EditText>(R.id.et_email_editar)
         val etSenha = findViewById<EditText>(R.id.et_senha_editar)
+        val etDataNascimento = findViewById<EditText>(R.id.et_data_nascimento_editar)
         val etPeso = findViewById<EditText>(R.id.et_peso_editar)
         val etAltura = findViewById<EditText>(R.id.et_altura_editar)
         val llSucesso = findViewById<LinearLayout>(R.id.ll_sucesso_salvar)
@@ -60,11 +64,17 @@ class EditarPerfilActivity : AppCompatActivity() {
         etNome.setText(Sessao.obterNome(this))
         etNomeUsuario.setText(Sessao.obterNomeUsuario(this))
         etEmail.setText(Sessao.obterEmail(this))
+        val dataNascimentoAtual = Sessao.obterDataNascimento(this)
+        if (dataNascimentoAtual.isNotBlank()) {
+            etDataNascimento.setText(formatarDataTela(dataNascimentoAtual))
+            etDataNascimento.tag = dataNascimentoAtual
+        }
         Sessao.obterPeso(this)?.let { etPeso.setText(it.toString()) }
         Sessao.obterAltura(this)?.let { etAltura.setText(it.toString()) }
         carregarFotoAtual()
 
         btnVoltar.setOnClickListener { finish() }
+        etDataNascimento.setOnClickListener { mostrarSeletorData(etDataNascimento) }
         llAlterarFoto.setOnClickListener { seletorFoto.launch("image/*") }
         tvAlterarFoto.setOnClickListener { seletorFoto.launch("image/*") }
 
@@ -73,6 +83,7 @@ class EditarPerfilActivity : AppCompatActivity() {
             val nomeUsuario = etNomeUsuario.text.toString().trim()
             val email = etEmail.text.toString().trim().lowercase(Locale.ROOT)
             val senha = etSenha.text.toString()
+            val dataNascimento = etDataNascimento.tag as? String ?: Sessao.obterDataNascimento(this)
             val peso = etPeso.text.toString().trim().replace(",", ".").toDoubleOrNull()
             val altura = etAltura.text.toString().trim().toIntOrNull()
             val usuarioId = Sessao.obterUsuarioId(this)
@@ -106,10 +117,10 @@ class EditarPerfilActivity : AppCompatActivity() {
             val uri = fotoSelecionadaUri
             if (uri != null) {
                 enviarFoto(uri, usuarioId) { fotoUrl ->
-                    salvarPerfil(usuarioId, nome, nomeUsuario, email, senha, fotoUrl, peso, altura, llSucesso)
+                    salvarPerfil(usuarioId, nome, nomeUsuario, email, senha, fotoUrl, peso, altura, dataNascimento, llSucesso)
                 }
             } else {
-                salvarPerfil(usuarioId, nome, nomeUsuario, email, senha, Sessao.obterFotoUrl(this), peso, altura, llSucesso)
+                salvarPerfil(usuarioId, nome, nomeUsuario, email, senha, Sessao.obterFotoUrl(this), peso, altura, dataNascimento, llSucesso)
             }
         }
     }
@@ -147,6 +158,7 @@ class EditarPerfilActivity : AppCompatActivity() {
         fotoUrl: String,
         peso: Double?,
         altura: Int?,
+        dataNascimento: String,
         llSucesso: LinearLayout
     ) {
         val dadosAtualizados = UsuarioAtualizar(
@@ -156,7 +168,8 @@ class EditarPerfilActivity : AppCompatActivity() {
             senha = senha.ifEmpty { null },
             foto_url = fotoUrl.ifEmpty { null },
             peso = peso,
-            altura = altura
+            altura = altura,
+            data_nascimento = dataNascimento.ifEmpty { null }
         )
 
         RetrofitClient.api.atualizarUsuario("eq.$usuarioId", dadosAtualizados)
@@ -164,9 +177,22 @@ class EditarPerfilActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     btnSalvar.isEnabled = true
                     if (response.isSuccessful) {
-                        Sessao.salvar(this@EditarPerfilActivity, email, usuarioId, nome, fotoUrl, nomeUsuario, peso, altura)
+                        Sessao.salvar(
+                            this@EditarPerfilActivity,
+                            email,
+                            usuarioId,
+                            nome,
+                            fotoUrl,
+                            nomeUsuario,
+                            peso,
+                            altura,
+                            Sessao.obterAccountType(this@EditarPerfilActivity),
+                            dataNascimento
+                        )
                         fotoSelecionadaUri = null
                         llSucesso.visibility = View.VISIBLE
+                        findViewById<ScrollView>(R.id.sv_editar_perfil).smoothScrollTo(0, 0)
+                        Toast.makeText(this@EditarPerfilActivity, "Perfil salvo com sucesso!", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this@EditarPerfilActivity, "Erro: ${response.code()}", Toast.LENGTH_SHORT).show()
                     }
@@ -198,5 +224,36 @@ class EditarPerfilActivity : AppCompatActivity() {
             reduzida.recycle()
             output.toByteArray()
         }
+    }
+
+    private fun mostrarSeletorData(campo: EditText) {
+        val partes = (campo.tag as? String).orEmpty().split("-")
+        val calendario = Calendar.getInstance().apply {
+            if (partes.size == 3) {
+                set(
+                    partes[0].toIntOrNull() ?: get(Calendar.YEAR),
+                    (partes[1].toIntOrNull() ?: 1) - 1,
+                    partes[2].toIntOrNull() ?: 1
+                )
+            } else {
+                add(Calendar.YEAR, -18)
+            }
+        }
+        DatePickerDialog(
+            this,
+            { _, ano, mes, dia ->
+                val dataBanco = "%04d-%02d-%02d".format(ano, mes + 1, dia)
+                campo.setText(formatarDataTela(dataBanco))
+                campo.tag = dataBanco
+            },
+            calendario.get(Calendar.YEAR),
+            calendario.get(Calendar.MONTH),
+            calendario.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
+
+    private fun formatarDataTela(dataBanco: String): String {
+        val partes = dataBanco.take(10).split("-")
+        return if (partes.size == 3) "${partes[2]}/${partes[1]}/${partes[0]}" else dataBanco
     }
 }

@@ -160,6 +160,7 @@
                     android:layout_marginBottom="12dp" />
 
                 <TextView
+                    android:id="@+id/tv_titulo_selecionar_arquivo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Selecionar Arquivo"
@@ -169,6 +170,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/tv_descricao_arquivo_selecionado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Selecione o arquivo do seu dispositivo para iniciar o upload"

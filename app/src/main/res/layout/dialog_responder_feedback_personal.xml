@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_topic_card"
+    android:orientation="vertical"
+    android:padding="22dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Responder feedback"
+        android:textColor="#FFFFFF"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_dialog_feedback_contexto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Treino • intensidade • duracao"
+        android:textColor="#4CAF50"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_dialog_feedback_observacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_card_dark"
+        android:lineSpacingMultiplier="1.25"
+        android:padding="14dp"
+        android:text="Observacao enviada pelo aluno"
+        android:textColor="#A0A0A0"
+        android:textSize="13sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="8dp"
+        android:text="SUA RESPOSTA"
+        android:textColor="#A0A0A0"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_dialog_resposta_personal"
+        android:layout_width="match_parent"
+        android:layout_height="132dp"
+        android:background="@drawable/bg_input_dark"
+        android:gravity="top"
+        android:hint="Escreva uma orientacao clara para o aluno"
+        android:inputType="textMultiLine|textCapSentences"
+        android:maxLines="6"
+        android:minLines="4"
+        android:padding="14dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#666666"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_cancelar_resposta_personal"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="CANCELAR"
+            android:textColor="#A0A0A0"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_enviar_resposta_personal"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_btn_green"
+            android:gravity="center"
+            android:minWidth="118dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:text="ENVIAR"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

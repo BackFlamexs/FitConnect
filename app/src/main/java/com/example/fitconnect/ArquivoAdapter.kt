@@ -1,5 +1,8 @@
 package com.example.fitconnect
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +55,21 @@ class ArquivoAdapter(
             }
         )
         holder.ivDeletar.setOnClickListener { onDeletar(arq) }
+        holder.itemView.setOnClickListener {
+            if (arq.arquivo_url.isBlank()) return@setOnClickListener
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(arq.arquivo_url)).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            try {
+                holder.itemView.context.startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                android.widget.Toast.makeText(
+                    holder.itemView.context,
+                    "Nenhum app encontrado para abrir este arquivo.",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     override fun getItemCount() = lista.size

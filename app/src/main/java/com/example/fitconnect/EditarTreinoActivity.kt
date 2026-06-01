@@ -52,6 +52,7 @@ class EditarTreinoActivity : AppCompatActivity() {
 
         val btnVoltar = findViewById<ImageView>(R.id.iv_voltar_editar)
         val etNome = findViewById<EditText>(R.id.et_nome_treino_editar)
+        val etDescricao = findViewById<EditText>(R.id.et_descricao_treino_editar)
         val btnSalvar = findViewById<android.widget.Button>(R.id.btn_salvar_alteracoes)
         val tvAdicionar = findViewById<TextView>(R.id.tv_adicionar_exercicio_editar)
         val llDia = findViewById<LinearLayout>(R.id.ll_dia_semana_editar)
@@ -62,11 +63,13 @@ class EditarTreinoActivity : AppCompatActivity() {
 
         treinoId = intent.getIntExtra("TREINO_ID", 0)
         val nomeTreino = intent.getStringExtra("NOME_TREINO") ?: ""
+        val detalhesTreino = intent.getStringExtra("DETALHES_TREINO") ?: ""
         tagOriginal = intent.getStringExtra("TAG_DIA") ?: ""
         diaSemanaOriginal = intent.getStringExtra("DIA_SEMANA") ?: ""
         tagSelecionada = tagOriginal
         diaSemanaSelecionado = diaSemanaOriginal
         etNome.setText(nomeTreino)
+        etDescricao.setText(separarCategoriaDescricao(detalhesTreino).second)
         tvDiaLabel.text = diaSemanaSelecionado.ifEmpty { "Selecione o dia" }
 
         btnVoltar.setOnClickListener { finish() }
@@ -83,7 +86,7 @@ class EditarTreinoActivity : AppCompatActivity() {
                 Toast.makeText(this, "Selecione o dia da semana.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            validarConflitoESalvar(novoNome)
+            validarConflitoESalvar(novoNome, etDescricao.text.toString().trim())
         }
 
         carregarTreinos()
@@ -164,7 +167,7 @@ class EditarTreinoActivity : AppCompatActivity() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_selecionar_exercicio, null)
         val etBusca = dialogView.findViewById<EditText>(R.id.et_busca_galeria_dialog)
         val listView = dialogView.findViewById<ListView>(R.id.lv_galeria_dialog)
-        val adapter = ArrayAdapter(this, R.layout.item_dialog_exercicio, listaFiltrada.map { it.nome }.toMutableList())
+        val adapter = ArrayAdapter(this, R.layout.item_dialog_exercicio, listaFiltrada.map { corrigirNomeExercicio(it.nome) }.toMutableList())
         listView.adapter = adapter
 
         val dialog = AlertDialog.Builder(this)
@@ -186,7 +189,7 @@ class EditarTreinoActivity : AppCompatActivity() {
                     }
                 }
                 adapter.clear()
-                adapter.addAll(listaFiltrada.map { it.nome })
+                adapter.addAll(listaFiltrada.map { corrigirNomeExercicio(it.nome) })
                 adapter.notifyDataSetChanged()
             }
 
@@ -222,7 +225,7 @@ class EditarTreinoActivity : AppCompatActivity() {
     private fun adicionarExercicioView(nome: String, categoria: String, equipamento: String, series: String, reps: String) {
         val view = layoutInflater.inflate(R.layout.item_exercicio_selecionado, llContainer, false)
 
-        view.findViewById<TextView>(R.id.tv_nome_exerc_sel).text = nome
+        view.findViewById<TextView>(R.id.tv_nome_exerc_sel).text = corrigirNomeExercicio(nome)
         view.findViewById<TextView>(R.id.tv_categ_exerc_sel).text = listOf(categoria, equipamento)
             .filter { it.isNotBlank() }
             .joinToString(" • ")
@@ -238,20 +241,20 @@ class EditarTreinoActivity : AppCompatActivity() {
         atualizarContador()
     }
 
-    private fun validarConflitoESalvar(novoNome: String) {
+    private fun validarConflitoESalvar(novoNome: String, descricao: String) {
         val mudouDia = diaSemanaSelecionado != diaSemanaOriginal
         val treinoConflitante = todosTreinos.firstOrNull {
             it.id != treinoId && it.dia_semana == diaSemanaSelecionado
         }
 
         if (mudouDia && treinoConflitante != null) {
-            mostrarDialogTrocaDia(novoNome, treinoConflitante)
+            mostrarDialogTrocaDia(novoNome, descricao, treinoConflitante)
         } else {
-            salvarAlteracoes(novoNome, null)
+            salvarAlteracoes(novoNome, descricao, null)
         }
     }
 
-    private fun mostrarDialogTrocaDia(novoNome: String, treinoConflitante: TreinoBanco) {
+    private fun mostrarDialogTrocaDia(novoNome: String, descricao: String, treinoConflitante: TreinoBanco) {
         val view = layoutInflater.inflate(R.layout.dialog_trocar_dia_treino, null)
         val dialog = AlertDialog.Builder(this)
             .setView(view)
@@ -266,7 +269,7 @@ class EditarTreinoActivity : AppCompatActivity() {
 
         view.findViewById<TextView>(R.id.btn_confirmar_troca_dia).setOnClickListener {
             dialog.dismiss()
-            salvarAlteracoes(novoNome, treinoConflitante)
+            salvarAlteracoes(novoNome, descricao, treinoConflitante)
         }
 
         dialog.setOnShowListener {
@@ -275,13 +278,14 @@ class EditarTreinoActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun salvarAlteracoes(novoNome: String, treinoParaTrocar: TreinoBanco?) {
+    private fun salvarAlteracoes(novoNome: String, descricao: String, treinoParaTrocar: TreinoBanco?) {
         RetrofitClient.api.atualizarTreino(
             "eq.$treinoId",
             TreinoAtualizar(
                 nome = novoNome,
                 tag_dia = tagSelecionada,
-                dia_semana = diaSemanaSelecionado
+                dia_semana = diaSemanaSelecionado,
+                detalhes = montarDetalhesAtualizados(descricao)
             )
         )
             .enqueue(object : Callback<Void> {
@@ -381,7 +385,7 @@ class EditarTreinoActivity : AppCompatActivity() {
         val lista = mutableListOf<ExercicioCriacao>()
         for (i in 0 until llContainer.childCount) {
             val view = llContainer.getChildAt(i)
-            val nome = view.findViewById<TextView>(R.id.tv_nome_exerc_sel).text.toString().trim()
+            val nome = corrigirNomeExercicio(view.findViewById<TextView>(R.id.tv_nome_exerc_sel).text.toString().trim())
             val chave = nome.lowercase()
             if (nome.isBlank() || !vistos.add(chave)) continue
             val series = view.findViewById<EditText>(R.id.et_series_exerc).text.toString().trim().ifEmpty { "3" }
@@ -419,5 +423,24 @@ class EditarTreinoActivity : AppCompatActivity() {
 
     private fun atualizarContador() {
         tvCount.text = "Exercícios (${llContainer.childCount})"
+    }
+    private fun montarDetalhesAtualizados(descricao: String): String {
+        val categoria = separarCategoriaDescricao(intent.getStringExtra("DETALHES_TREINO") ?: "").first
+        val descricaoFinal = descricao.ifBlank { "Descricao ainda nao informada para este treino." }
+        return "$categoria • $descricaoFinal"
+    }
+
+    private fun separarCategoriaDescricao(detalhes: String): Pair<String, String> {
+        val partes = detalhes.split("•", limit = 2).map { it.trim() }
+        val categoria = partes.getOrNull(0)?.ifBlank { "Treino" } ?: "Treino"
+        val descricao = partes.getOrNull(1)?.ifBlank { null } ?: ""
+        return categoria to descricao
+    }
+
+    private fun corrigirNomeExercicio(nome: String): String {
+        return when (nome.trim().lowercase()) {
+            "afundo" -> "Agachamento"
+            else -> nome
+        }
     }
 }

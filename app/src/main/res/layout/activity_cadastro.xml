@@ -31,6 +31,40 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tipo de conta"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/rg_tipo_conta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <RadioButton
+                android:id="@+id/rb_tipo_aluno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#4CAF50"
+                android:checked="true"
+                android:text="Aluno"
+                android:textColor="#FFFFFF" />
+
+            <RadioButton
+                android:id="@+id/rb_tipo_personal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:buttonTint="#4CAF50"
+                android:text="Personal Trainer"
+                android:textColor="#FFFFFF" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Nome completo"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
@@ -132,6 +166,26 @@
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#333333"
                 android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data de nascimento"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_data_nascimento_cadastro"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#333333"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="dd/mm/aaaa"
+                android:inputType="none"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#808080"/>
 
             <TextView
                 android:layout_width="wrap_content"

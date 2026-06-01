@@ -4,14 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@drawable/bg_card_dark"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:padding="12dp"
     android:layout_marginBottom="12dp"
     android:gravity="center_vertical">
 
-    <View
+    <ImageView
+        android:id="@+id/iv_exercicio_detalhe"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="#1C1A24"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_fitness_topic"
         android:layout_marginEnd="16dp"/>
 
     <LinearLayout

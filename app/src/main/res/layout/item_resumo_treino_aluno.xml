@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/bg_topic_card"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="14dp">
+
+    <TextView
+        android:id="@+id/tv_resumo_tag_dia"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_pill_green"
+        android:gravity="center"
+        android:text="SEG"
+        android:textColor="@color/fit_text_primary"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_resumo_nome_treino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Treino do aluno"
+            android:textColor="@color/fit_text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_resumo_dia_semana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="SEGUNDA-FEIRA"
+            android:textColor="@color/fit_primary_green"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_resumo_detalhes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="Musculacao"
+            android:textColor="@color/fit_text_secondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

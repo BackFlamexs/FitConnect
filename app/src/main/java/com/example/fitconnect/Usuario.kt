@@ -6,7 +6,9 @@ data class UsuarioCriacao(
     val email: String,
     val senha: String,
     val telefone: String,
-    val genero: String
+    val genero: String,
+    val account_type: String,
+    val data_nascimento: String? = null
 )
 
 data class Usuario(
@@ -19,5 +21,7 @@ data class Usuario(
     val id: Int = 0,
     val foto_url: String? = "",
     val peso: Double? = null,
-    val altura: Int? = null
+    val altura: Int? = null,
+    val account_type: String? = "student",
+    val data_nascimento: String? = null
 )

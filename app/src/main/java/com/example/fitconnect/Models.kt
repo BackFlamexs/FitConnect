@@ -32,7 +32,8 @@ data class TreinoCriacao(
 data class TreinoAtualizar(
     val nome: String,
     val tag_dia: String? = null,
-    val dia_semana: String? = null
+    val dia_semana: String? = null,
+    val detalhes: String? = null
 )
 
 // Corpo para atualizar dados do usuário (PATCH)
@@ -43,7 +44,8 @@ data class UsuarioAtualizar(
     val senha: String? = null,
     val foto_url: String? = null,
     val peso: Double? = null,
-    val altura: Int? = null
+    val altura: Int? = null,
+    val data_nascimento: String? = null
 )
 
 // Galeria de exercícios (catálogo global)
@@ -64,14 +66,16 @@ data class ArquivoBanco(
     val nome: String = "",
     val tipo: String = "",
     val tamanho_kb: Int = 0,
-    val criado_em: String = ""
+    val criado_em: String = "",
+    val arquivo_url: String = ""
 )
 
 data class ArquivoCriacao(
     val usuario_id: Int,
     val nome: String,
     val tipo: String,
-    val tamanho_kb: Int = 0
+    val tamanho_kb: Int = 0,
+    val arquivo_url: String = ""
 )
 
 data class ExercicioCriacao(
@@ -88,7 +92,8 @@ data class FeedbackBanco(
     val intensidade: String = "",
     val duracao_min: Int = 0,
     val observacoes: String = "",
-    val criado_em: String = ""
+    val criado_em: String = "",
+    val resposta_personal: String? = null
 )
 
 data class FeedbackCriacao(
@@ -97,6 +102,23 @@ data class FeedbackCriacao(
     val intensidade: String,
     val duracao_min: Int,
     val observacoes: String
+)
+
+data class FeedbackRespostaAtualizar(
+    val resposta_personal: String
+)
+
+data class PersonalAlunoVinculo(
+    val id: Int = 0,
+    val personal_id: Int = 0,
+    val aluno_id: Int = 0,
+    val criado_em: String = "",
+    val usuarios: Usuario? = null
+)
+
+data class PersonalAlunoCriacao(
+    val personal_id: Int,
+    val aluno_id: Int
 )
 
 // Sessão do usuário logado via SharedPreferences
@@ -111,7 +133,9 @@ object Sessao {
         fotoUrl: String = "",
         nomeUsuario: String = nome,
         peso: Double? = null,
-        altura: Int? = null
+        altura: Int? = null,
+        accountType: String = "student",
+        dataNascimento: String? = null
     ) {
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
             .putString("email", email)
@@ -121,6 +145,8 @@ object Sessao {
             .putString("foto_url", fotoUrl)
             .putString("peso", peso?.toString().orEmpty())
             .putInt("altura", altura ?: 0)
+            .putString("account_type", accountType)
+            .putString("data_nascimento", dataNascimento.orEmpty())
             .apply()
     }
 
@@ -148,6 +174,12 @@ object Sessao {
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .getInt("altura", 0)
             .takeIf { it > 0 }
+
+    fun obterAccountType(context: Context): String =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString("account_type", "student") ?: "student"
+
+    fun obterDataNascimento(context: Context): String =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString("data_nascimento", "") ?: ""
 
     fun limpar(context: Context) =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().clear().apply()

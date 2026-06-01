@@ -20,7 +20,16 @@ interface SupabaseApi {
     @GET("rest/v1/usuarios")
     fun fazerLogin(
         @Query("email") email: String,
-        @Query("senha") senha: String
+        @Query("senha") senha: String,
+        @Query("account_type") accountType: String
+    ): Call<List<Usuario>>
+
+    @GET("rest/v1/usuarios")
+    fun buscarAlunoPorEmail(
+        @Query("email") email: String,
+        @Query("account_type") accountType: String = "eq.student",
+        @Query("select") select: String = "id,nome_completo,nome_usuario,email,account_type,peso,altura,data_nascimento",
+        @Query("limit") limit: Int = 1
     ): Call<List<Usuario>>
 
     @Headers("Prefer: return=minimal")
@@ -34,6 +43,13 @@ interface SupabaseApi {
 
     @GET("rest/v1/treinos")
     fun buscarTreinos(
+        @Query("select") select: String = "*",
+        @Query("order") order: String = "id.asc"
+    ): Call<List<TreinoBanco>>
+
+    @GET("rest/v1/treinos")
+    fun buscarTreinosPorUsuario(
+        @Query("usuario_id") usuarioId: String,
         @Query("select") select: String = "*",
         @Query("order") order: String = "id.asc"
     ): Call<List<TreinoBanco>>
@@ -106,4 +122,22 @@ interface SupabaseApi {
         @Query("select") select: String = "*",
         @Query("order") order: String = "criado_em.desc"
     ): Call<List<FeedbackBanco>>
+
+    @Headers("Prefer: return=minimal")
+    @PATCH("rest/v1/feedbacks")
+    fun responderFeedback(
+        @Query("id") id: String,
+        @Body resposta: FeedbackRespostaAtualizar
+    ): Call<Void>
+
+    @GET("rest/v1/personal_alunos")
+    fun buscarAlunosVinculados(
+        @Query("personal_id") personalId: String,
+        @Query("select") select: String = "id,personal_id,aluno_id,criado_em,usuarios!personal_alunos_aluno_id_fkey(id,nome_completo,nome_usuario,email,account_type,peso,altura,data_nascimento)",
+        @Query("order") order: String = "criado_em.desc"
+    ): Call<List<PersonalAlunoVinculo>>
+
+    @Headers("Prefer: return=representation")
+    @POST("rest/v1/personal_alunos")
+    fun criarVinculoAluno(@Body vinculo: PersonalAlunoCriacao): Call<List<PersonalAlunoVinculo>>
 }

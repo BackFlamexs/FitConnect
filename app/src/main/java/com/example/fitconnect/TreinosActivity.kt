@@ -2,6 +2,7 @@ package com.example.fitconnect
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +24,7 @@ class TreinosActivity : AppCompatActivity() {
     private lateinit var filtroForca: TextView
     private lateinit var filtroCardio: TextView
     private lateinit var filtroMusculacao: TextView
+    private var treinosConcluidos = emptySet<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +42,7 @@ class TreinosActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         btnVoltar.setOnClickListener { finish() }
-        btnAdicionar.setOnClickListener {
-            startActivity(Intent(this, CriacaoTreinoActivity::class.java))
-        }
+        btnAdicionar.visibility = View.GONE
 
         val todosChips = listOf(filtroTodos, filtroForca, filtroCardio, filtroMusculacao)
 
@@ -85,7 +85,7 @@ class TreinosActivity : AppCompatActivity() {
     }
 
     private fun criarAdapter(lista: List<Treino>): TreinoAdapter {
-        return TreinoAdapter(lista) { treino ->
+        return TreinoAdapter(lista, { treino ->
             androidx.appcompat.app.AlertDialog.Builder(this)
                 .setTitle("Excluir treino")
                 .setMessage("Deseja excluir \"${treino.nome}\"?")
@@ -106,11 +106,32 @@ class TreinosActivity : AppCompatActivity() {
                 }
                 .setNegativeButton("Cancelar", null)
                 .show()
-        }
+        }, permitirGerenciar = false)
     }
 
     private fun carregarTreinos() {
-        RetrofitClient.api.buscarTreinos().enqueue(object : Callback<List<TreinoBanco>> {
+        val usuarioId = Sessao.obterUsuarioId(this)
+        RetrofitClient.api.buscarFeedbacks("eq.$usuarioId").enqueue(object : Callback<List<FeedbackBanco>> {
+            override fun onResponse(call: Call<List<FeedbackBanco>>, response: Response<List<FeedbackBanco>>) {
+                treinosConcluidos = if (response.isSuccessful) {
+                    (response.body() ?: emptyList())
+                        .map { it.treino_nome.trim().lowercase() }
+                        .toSet()
+                } else {
+                    emptySet()
+                }
+                carregarTreinosDoUsuario(usuarioId)
+            }
+
+            override fun onFailure(call: Call<List<FeedbackBanco>>, t: Throwable) {
+                treinosConcluidos = emptySet()
+                carregarTreinosDoUsuario(usuarioId)
+            }
+        })
+    }
+
+    private fun carregarTreinosDoUsuario(usuarioId: Int) {
+        RetrofitClient.api.buscarTreinosPorUsuario("eq.$usuarioId").enqueue(object : Callback<List<TreinoBanco>> {
             override fun onResponse(call: Call<List<TreinoBanco>>, response: Response<List<TreinoBanco>>) {
                 if (response.isSuccessful) {
                     todosTreinos = response.body()?.map { banco ->
@@ -119,7 +140,8 @@ class TreinosActivity : AppCompatActivity() {
                             nome = banco.nome,
                             tagDia = banco.tag_dia,
                             diaSemana = banco.dia_semana,
-                            detalhes = banco.detalhes
+                            detalhes = banco.detalhes,
+                            concluido = banco.nome.trim().lowercase() in treinosConcluidos
                         )
                     } ?: emptyList()
                     aplicarFiltro()

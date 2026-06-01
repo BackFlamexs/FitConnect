@@ -155,6 +155,30 @@
 
             <!-- Header Exercícios -->
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DESCRICAO DO TREINO"
+                android:textColor="#A0A0A0"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/et_descricao_treino_criar"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:background="@drawable/bg_search_input"
+                android:gravity="top"
+                android:hint="Ex: foco em pernas, gluteos e estabilidade, com carga moderada."
+                android:inputType="textMultiLine|textCapSentences"
+                android:maxLines="4"
+                android:padding="14dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#555555"
+                android:textSize="14sp"
+                android:layout_marginBottom="28dp" />
+
+            <TextView
                 android:id="@+id/tv_count_exercicios"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

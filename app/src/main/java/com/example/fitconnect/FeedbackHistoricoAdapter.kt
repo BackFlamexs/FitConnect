@@ -17,6 +17,8 @@ class FeedbackHistoricoAdapter(private var lista: List<FeedbackBanco>) :
         val tvBadge: TextView = view.findViewById(R.id.tv_badge_intensidade)
         val tvData: TextView = view.findViewById(R.id.tv_data_feedback)
         val tvComentario: TextView = view.findViewById(R.id.tv_comentario_feedback)
+        val tvRespostaPersonal: TextView = view.findViewById(R.id.tv_resposta_personal_feedback)
+        val layoutRespostaPersonal: View = view.findViewById(R.id.layout_resposta_personal_feedback)
         val ivIcone: ImageView = view.findViewById(R.id.iv_icone_feedback)
     }
 
@@ -65,6 +67,14 @@ class FeedbackHistoricoAdapter(private var lista: List<FeedbackBanco>) :
             holder.tvComentario.text = "\"${fb.observacoes}\""
             holder.tvComentario.setTextColor(0xFFA0A0A0.toInt())
             holder.tvComentario.setTypeface(null, android.graphics.Typeface.ITALIC)
+        }
+
+        val resposta = fb.resposta_personal.orEmpty().trim()
+        if (resposta.isEmpty()) {
+            holder.layoutRespostaPersonal.visibility = View.GONE
+        } else {
+            holder.layoutRespostaPersonal.visibility = View.VISIBLE
+            holder.tvRespostaPersonal.text = resposta
         }
     }
 

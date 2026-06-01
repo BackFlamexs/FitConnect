@@ -21,6 +21,8 @@ class MenuActivity : AppCompatActivity() {
         val llMeusArquivos = findViewById<LinearLayout>(R.id.ll_meus_arquivos_menu)
         val llFeedbacks = findViewById<LinearLayout>(R.id.ll_feedbacks_menu)
         val llGaleria = findViewById<LinearLayout>(R.id.ll_galeria_menu)
+        val llFitConnectPro = findViewById<LinearLayout>(R.id.ll_fitconnect_pro_menu)
+        val btnAtualizarPro = findViewById<Button>(R.id.btn_atualizar_pro_menu)
         val btnSair = findViewById<Button>(R.id.btn_sair_menu)
         val tvNomeUsuario = findViewById<TextView>(R.id.tv_nome_usuario_menu)
         val vFecharMenu = findViewById<android.view.View>(R.id.v_fechar_menu)
@@ -63,6 +65,12 @@ class MenuActivity : AppCompatActivity() {
         }
         llGaleria.setOnClickListener {
             startActivity(Intent(this, GaleriaExerciciosActivity::class.java))
+        }
+        llFitConnectPro.setOnClickListener {
+            startActivity(Intent(this, PagamentoProActivity::class.java))
+        }
+        btnAtualizarPro.setOnClickListener {
+            startActivity(Intent(this, PagamentoProActivity::class.java))
         }
 
         // Sair — limpa sessão e volta ao login

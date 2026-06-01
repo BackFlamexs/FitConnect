@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#15131C">
@@ -10,7 +11,6 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Cabeçalho -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,84 +21,98 @@
                 android:id="@+id/iv_voltar_detalhe"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_back"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_alignParentStart="true" />
+                android:src="@drawable/ic_arrow_back" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Visão Geral"
+                android:layout_centerInParent="true"
+                android:text="Visao Geral"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_centerInParent="true"/>
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv_tag_treino_detalhe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TREINO A"
+            android:text="TREINO"
             android:textColor="#4CAF50"
-            android:textStyle="bold"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_titulo_detalhe"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pernas e Glúteos"
+            android:layout_marginTop="4dp"
+            android:text="Pernas e Gluteos"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
             android:textSize="28sp"
-            android:layout_marginTop="4dp"/>
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_descricao_treino_detalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingMultiplier="1.25"
+            android:text="Descricao do treino"
+            android:textColor="#D7D7D7"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_resumo_treino_detalhe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="⏱ 60 min  •  6 Exercícios"
-            android:textColor="#A0A0A0"
-            android:textSize="14sp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:text="Exercicios do treino"
+            android:textColor="#A0A0A0"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="32dp">
+            android:layout_marginBottom="32dp"
+            android:orientation="horizontal">
+
             <TextView
+                android:id="@+id/tv_categoria_treino_detalhe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hipertrofia"
-                android:textColor="#FFFFFF"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_pill_green"
-                android:layout_marginEnd="8dp"/>
+                android:text="Categoria"
+                android:textColor="#FFFFFF" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Intermediário"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/bg_pill_dark" />
+                android:background="@drawable/bg_pill_dark"
+                android:text="Intermediario"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exercícios"
+            android:layout_marginBottom="16dp"
+            android:text="Exercicios"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"/>
+            android:textStyle="bold" />
 
-        <!-- RECYCLER VIEW AQUI -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_exercicios_detalhe"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
-            android:paddingBottom="80dp"/>
+            android:paddingBottom="80dp" />
 
     </LinearLayout>
 
@@ -106,13 +120,12 @@
         android:id="@+id/btn_iniciar_treino"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="▶ Iniciar Treino"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:background="@drawable/bg_btn_green"
         android:layout_alignParentBottom="true"
         android:layout_margin="24dp"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:backgroundTint="@null"/>
+        android:background="@drawable/bg_btn_green"
+        android:text="Iniciar Treino"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
 
 </RelativeLayout>

@@ -42,13 +42,16 @@ class CriacaoTreinoActivity : AppCompatActivity() {
 
     private var galeriaCache = listOf<GaleriaExercicioBanco>()
     private var galeriaCarregada = false
+    private var usuarioDestinoId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_criacao_treino)
+        usuarioDestinoId = intent.getIntExtra("USUARIO_ID_DESTINO", Sessao.obterUsuarioId(this))
 
         val ivVoltar = findViewById<ImageView>(R.id.iv_voltar_criacao)
         val etNome = findViewById<EditText>(R.id.et_nome_treino_criar)
+        val etDescricao = findViewById<EditText>(R.id.et_descricao_treino_criar)
         val llDia = findViewById<LinearLayout>(R.id.ll_dia_semana)
         val tvDiaLabel = findViewById<TextView>(R.id.tv_dia_label)
         val llCategoria = findViewById<LinearLayout>(R.id.ll_categoria)
@@ -98,7 +101,7 @@ class CriacaoTreinoActivity : AppCompatActivity() {
                 Toast.makeText(this, "Selecione a categoria.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            salvarTreino(nome)
+            salvarTreino(nome, etDescricao.text.toString().trim())
         }
 
         carregarGaleria()
@@ -142,7 +145,7 @@ class CriacaoTreinoActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(
             this,
             R.layout.item_dialog_exercicio,
-            listaFiltrada.map { it.nome }.toMutableList()
+            listaFiltrada.map { corrigirNomeExercicio(it.nome) }.toMutableList()
         )
         listView.adapter = adapter
 
@@ -164,7 +167,7 @@ class CriacaoTreinoActivity : AppCompatActivity() {
                     }.toMutableList()
                 }
                 adapter.clear()
-                adapter.addAll(listaFiltrada.map { it.nome })
+                adapter.addAll(listaFiltrada.map { corrigirNomeExercicio(it.nome) })
                 adapter.notifyDataSetChanged()
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -190,7 +193,7 @@ class CriacaoTreinoActivity : AppCompatActivity() {
 
         val view = layoutInflater.inflate(R.layout.item_exercicio_selecionado, llContainer, false)
 
-        view.findViewById<TextView>(R.id.tv_nome_exerc_sel).text = exercicio.nome
+        view.findViewById<TextView>(R.id.tv_nome_exerc_sel).text = corrigirNomeExercicio(exercicio.nome)
 
         val info = listOfNotNull(
             exercicio.categoria.ifEmpty { null },
@@ -226,16 +229,19 @@ class CriacaoTreinoActivity : AppCompatActivity() {
         return false
     }
 
-    private fun salvarTreino(nome: String) {
+    private fun salvarTreino(nome: String, descricao: String) {
         val (tag, diaSemana) = tagsMap[diaSelecionado!!]!!
-        val usuarioId = Sessao.obterUsuarioId(this)
+        val usuarioId = usuarioDestinoId.takeIf { it > 0 } ?: Sessao.obterUsuarioId(this)
+        val descricaoFinal = descricao.ifBlank {
+            "Treino de ${categoriaSelecionada!!.lowercase()} programado para ${diaSelecionado!!.lowercase()}."
+        }
 
         val novoTreino = TreinoCriacao(
             usuario_id = usuarioId,
             nome = nome,
             tag_dia = tag,
             dia_semana = diaSemana,
-            detalhes = categoriaSelecionada!!
+            detalhes = "${categoriaSelecionada!!} • $descricaoFinal"
         )
 
         RetrofitClient.api.criarTreino(novoTreino).enqueue(object : Callback<List<TreinoBanco>> {
@@ -263,7 +269,7 @@ class CriacaoTreinoActivity : AppCompatActivity() {
 
         for (i in 0 until llContainer.childCount) {
             val v = llContainer.getChildAt(i)
-            val nome = v.findViewById<TextView>(R.id.tv_nome_exerc_sel).text.toString()
+            val nome = corrigirNomeExercicio(v.findViewById<TextView>(R.id.tv_nome_exerc_sel).text.toString())
             if (exerciciosList.any { it.nome.equals(nome, ignoreCase = true) }) continue
             val series = v.findViewById<EditText>(R.id.et_series_exerc).text.toString().trim().ifEmpty { "3" }
             val reps = v.findViewById<EditText>(R.id.et_reps_exerc).text.toString().trim().ifEmpty { "10" }
@@ -292,6 +298,13 @@ class CriacaoTreinoActivity : AppCompatActivity() {
                     }
                 }
             })
+        }
+    }
+
+    private fun corrigirNomeExercicio(nome: String): String {
+        return when (nome.trim().lowercase()) {
+            "afundo" -> "Agachamento"
+            else -> nome
         }
     }
 }
