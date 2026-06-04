@@ -41,7 +41,7 @@ class DetalheGaleriaExercicioActivity : AppCompatActivity() {
             ivGif.visibility = View.VISIBLE
             Glide.with(this)
                 .load(gifUrl)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.ic_fitness_topic)
                 .error(R.drawable.ic_fitness_topic)
                 .into(ivGif)

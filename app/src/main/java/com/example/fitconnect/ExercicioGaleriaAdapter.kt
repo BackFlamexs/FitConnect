@@ -42,7 +42,7 @@ class ExercicioGaleriaAdapter(
             holder.ivIconePadrao.visibility = View.GONE
             Glide.with(holder.ivGif.context)
                 .load(ex.gif_url)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.ic_fitness_topic)
                 .error(R.drawable.ic_fitness_topic)
                 .into(holder.ivGif)

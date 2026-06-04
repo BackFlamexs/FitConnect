@@ -36,10 +36,9 @@ class ExercicioDetalheAdapter(private val listaExercicios: List<Exercicio>) : Re
         if (exercicio.gifUrl.isNotBlank()) {
             Glide.with(holder.ivExercicio.context)
                 .load(exercicio.gifUrl)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.ic_fitness_topic)
                 .error(R.drawable.ic_fitness_topic)
-                .centerCrop()
                 .into(holder.ivExercicio)
         } else {
             holder.ivExercicio.setImageResource(R.drawable.ic_fitness_topic)
