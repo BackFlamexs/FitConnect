@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- Placa esquerda -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M12,12 L16,12 Q24,12 24,20 L24,76 Q24,84 16,84 L12,84 Q4,84 4,76 L4,20 Q4,12 12,12 Z" />
+
+    <!-- Grip esquerdo -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M24,26 L38,26 L38,70 L24,70 Z" />
+
+    <!-- Barra central -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M38,36 L58,36 L58,60 L38,60 Z" />
+
+    <!-- Grip direito -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M58,26 L72,26 L72,70 L58,70 Z" />
+
+    <!-- Placa direita -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M80,12 L84,12 Q92,12 92,20 L92,76 Q92,84 84,84 L80,84 Q72,84 72,76 L72,20 Q72,12 80,12 Z" />
+
+</vector>

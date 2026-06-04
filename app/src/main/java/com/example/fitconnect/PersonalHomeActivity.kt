@@ -146,26 +146,28 @@ class PersonalHomeActivity : AppCompatActivity() {
     }
 
     private fun mostrarDialogVincularAluno() {
-        val input = EditText(this).apply {
-            hint = "email@aluno.com"
-            inputType = android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-            setSingleLine(true)
+        val view = layoutInflater.inflate(R.layout.dialog_vincular_aluno, null)
+        val etEmail = view.findViewById<EditText>(R.id.et_dialog_email_aluno)
+        val btnCancelar = view.findViewById<android.widget.TextView>(R.id.btn_cancelar_vincular)
+        val btnVincular = view.findViewById<android.widget.TextView>(R.id.btn_confirmar_vincular)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(view)
+            .create()
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        btnCancelar.setOnClickListener { dialog.dismiss() }
+        btnVincular.setOnClickListener {
+            val email = etEmail.text.toString().trim().lowercase(Locale.ROOT)
+            if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Informe um e-mail valido.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            dialog.dismiss()
+            buscarAlunoEVincular(email)
         }
 
-        AlertDialog.Builder(this)
-            .setTitle("Vincular aluno")
-            .setMessage("Informe o e-mail de um usuario cadastrado como Aluno.")
-            .setView(input)
-            .setNegativeButton("Cancelar", null)
-            .setPositiveButton("Vincular") { _, _ ->
-                val email = input.text.toString().trim().lowercase(Locale.ROOT)
-                if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    Toast.makeText(this, "Informe um e-mail valido.", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-                buscarAlunoEVincular(email)
-            }
-            .show()
+        dialog.show()
     }
 
     private fun buscarAlunoEVincular(email: String) {

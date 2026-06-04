@@ -64,25 +64,19 @@ class CriacaoTreinoActivity : AppCompatActivity() {
         ivVoltar.setOnClickListener { finish() }
 
         llDia.setOnClickListener {
-            AlertDialog.Builder(this)
-                .setTitle("Selecione o dia")
-                .setItems(dias) { _, index ->
-                    diaSelecionado = dias[index]
-                    tvDiaLabel.text = diaSelecionado
-                    tvDiaLabel.setTextColor(0xFFFFFFFF.toInt())
-                }
-                .show()
+            mostrarDialogOpcoes("Selecione o dia", dias) { index ->
+                diaSelecionado = dias[index]
+                tvDiaLabel.text = diaSelecionado
+                tvDiaLabel.setTextColor(0xFFFFFFFF.toInt())
+            }
         }
 
         llCategoria.setOnClickListener {
-            AlertDialog.Builder(this)
-                .setTitle("Selecione a categoria")
-                .setItems(categorias) { _, index ->
-                    categoriaSelecionada = categorias[index]
-                    tvCategLabel.text = categoriaSelecionada
-                    tvCategLabel.setTextColor(0xFFFFFFFF.toInt())
-                }
-                .show()
+            mostrarDialogOpcoes("Selecione a categoria", categorias) { index ->
+                categoriaSelecionada = categorias[index]
+                tvCategLabel.text = categoriaSelecionada
+                tvCategLabel.setTextColor(0xFFFFFFFF.toInt())
+            }
         }
 
         btnAdicionar.setOnClickListener { mostrarDialogGaleria() }
@@ -150,10 +144,9 @@ class CriacaoTreinoActivity : AppCompatActivity() {
         listView.adapter = adapter
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Selecionar Exercício")
             .setView(dialogView)
-            .setNegativeButton("Cancelar", null)
             .create()
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         etBusca.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -306,5 +299,27 @@ class CriacaoTreinoActivity : AppCompatActivity() {
             "afundo" -> "Agachamento"
             else -> nome
         }
+    }
+
+    private fun mostrarDialogOpcoes(titulo: String, opcoes: Array<String>, onSelect: (Int) -> Unit) {
+        val view = layoutInflater.inflate(R.layout.dialog_lista_opcoes, null)
+        view.findViewById<TextView>(R.id.tv_titulo_dialog_opcoes).text = titulo
+
+        val listView = view.findViewById<ListView>(R.id.lv_opcoes_dialog)
+        val adapter = ArrayAdapter(this, R.layout.item_dialog_exercicio, opcoes)
+        listView.adapter = adapter
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(view)
+            .create()
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        listView.setOnItemClickListener { _, _, index, _ ->
+            onSelect(index)
+            dialog.dismiss()
+        }
+        view.findViewById<TextView>(R.id.btn_cancelar_opcoes).setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
     }
 }

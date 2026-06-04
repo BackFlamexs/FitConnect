@@ -7,6 +7,13 @@
 
     <style name="Theme.FitConnect" parent="Base.Theme.FitConnect" />
 
+    <!-- Tema Splash: fundo escuro imediato para evitar flash branco -->
+    <style name="Theme.FitConnect.Splash" parent="Theme.FitConnect">
+        <item name="android:windowBackground">@color/fit_background</item>
+        <item name="android:statusBarColor">@color/fit_background</item>
+        <item name="android:navigationBarColor">@color/fit_background</item>
+    </style>
+
     <!-- Tema Transparente para o Menu Lateral -->
     <style name="Theme.FitConnect.Transparent" parent="Theme.FitConnect">
         <item name="android:windowIsTranslucent">true</item>

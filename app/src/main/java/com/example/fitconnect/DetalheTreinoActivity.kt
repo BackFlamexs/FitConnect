@@ -45,12 +45,17 @@ class DetalheTreinoActivity : AppCompatActivity() {
         tvResumo.text = "Carregando exercicios..."
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        btnVoltar.setOnClickListener { finish() }
-        btnIniciar.setOnClickListener {
-            val intent = Intent(this, ExecucaoTreinoActivity::class.java)
-            intent.putExtra("NOME_TREINO", nomeTreino)
-            startActivity(intent)
+        if (Sessao.obterAccountType(this) == "personal") {
+            btnIniciar.visibility = android.view.View.GONE
+        } else {
+            btnIniciar.setOnClickListener {
+                val intent = Intent(this, ExecucaoTreinoActivity::class.java)
+                intent.putExtra("NOME_TREINO", nomeTreino)
+                startActivity(intent)
+            }
         }
+
+        btnVoltar.setOnClickListener { finish() }
 
         carregarGaleria()
         carregarExercicios(treinoId)
