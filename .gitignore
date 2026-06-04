@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Variaveis de ambiente (nunca versionar)
+.env
+*.env

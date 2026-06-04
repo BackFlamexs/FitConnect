@@ -1,21 +1,35 @@
 """
-Script para popular a coluna gif_url da tabela galeria_exercicios no Supabase.
-Fonte das imagens: free-exercise-db (GitHub) - 873 exercicios gratuitos
+Script LEGADO: popula gif_url com imagens estaticas JPG do free-exercise-db.
+Este script foi substituido por update_gifs_exercisedb.py, que usa GIFs animados.
+Mantido apenas para referencia historica.
+
+Variaveis de ambiente necessarias:
+  SUPABASE_URL              - URL do projeto Supabase
+  SUPABASE_SERVICE_ROLE_KEY - Chave de servico do Supabase
 
 Como usar:
+  pip install requests python-dotenv
   python populate_gifs.py
-
-Requisito: pip install requests
 """
 
+import os
 import requests
 
-SUPABASE_URL         = "https://gltouzhsqtvoinphhbmv.supabase.co"
-SUPABASE_SERVICE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdG91emhzcXR2b2lucGhoYm12Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Mzg3MjIyMywiZXhwIjoyMDg5NDQ4MjIzfQ.eh50_w_e3S4fgh1Qto6tkN4IXrLX63Mp_AANxHhDVbY"
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+SUPABASE_URL         = os.environ.get("SUPABASE_URL", "")
+SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
+
+if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
+    print("ERRO: defina SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY no arquivo .env")
+    raise SystemExit(1)
 
 IMG_BASE = "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/"
 
-# Mapeamento: nome PT → termo de busca em ingles (parcial, case-insensitive)
 NOMES_PT_PARA_BUSCA = {
     "Supino Reto":           "barbell bench press",
     "Supino Inclinado":      "incline dumbbell",
@@ -68,7 +82,6 @@ NOMES_PT_PARA_BUSCA = {
     "Tríceps Francês":       "french press",
 }
 
-# Mapeamento de categorias PT → primaryMuscles no free-exercise-db
 CATEGORIAS_PARA_MUSCULOS = {
     "Peito":    ["chest"],
     "Costas":   ["lats", "middle back", "lower back"],
@@ -109,26 +122,6 @@ def carregar_banco_exercicios():
     return []
 
 
-def buscar_imagem(nome_pt: str, categoria: str, banco: list) -> str:
-    """Retorna a URL da imagem mais adequada para o exercicio."""
-
-    # 1a tentativa: busca por nome (parcial, case-insensitive)
-    termo = NOMES_PT_PARA_BUSCA.get(nome_pt, "").lower()
-    if termo:
-        for ex in banco:
-            if termo in ex.get("name", "").lower() and ex.get("images"):
-                return IMG_BASE + ex["images"][0]
-
-    # 2a tentativa: busca pelo musculo primario da categoria
-    musculos = CATEGORIAS_PARA_MUSCULOS.get(categoria, [])
-    for ex in banco:
-        primary = [m.lower() for m in ex.get("primaryMuscles", [])]
-        if any(m in primary for m in musculos) and ex.get("images"):
-            return IMG_BASE + ex["images"][0]
-
-    return ""
-
-
 def buscar_exercicios_supabase():
     url = f"{SUPABASE_URL}/rest/v1/galeria_exercicios"
     r = requests.get(url, headers=HEADERS_SUPABASE,
@@ -147,25 +140,22 @@ def atualizar_gif_url(ex_id: int, img_url: str) -> bool:
 
 
 def main():
-    print("\n=== FitConnect - Populando imagens de exercicios ===\n")
+    print("\n=== FitConnect - Populando imagens de exercicios (LEGADO - JPG) ===\n")
+    print("ATENCAO: use update_gifs_exercisedb.py para GIFs animados.\n")
 
     banco = carregar_banco_exercicios()
     if not banco:
         return
 
-    print()
     exercicios = buscar_exercicios_supabase()
     if not exercicios:
         print("Nenhum exercicio encontrado no Supabase.")
         return
 
-    # Evita duplicatas: ja processados por categoria (rotacao)
     contador_categoria: dict[str, int] = {}
     ok = 0
     falhou = 0
 
-    # Para o fallback por categoria funcionar corretamente (nao repetir o mesmo exercicio),
-    # pre-indexamos o banco por musculo
     banco_por_musculo: dict[str, list] = {}
     for ex in banco:
         for m in ex.get("primaryMuscles", []):
@@ -177,8 +167,6 @@ def main():
         ex_id = ex.get("id")
 
         img_url = ""
-
-        # 1a tentativa: busca por nome
         termo = NOMES_PT_PARA_BUSCA.get(nome, "").lower()
         if termo:
             for item in banco:
@@ -186,7 +174,6 @@ def main():
                     img_url = IMG_BASE + item["images"][0]
                     break
 
-        # 2a tentativa: fallback por musculo da categoria (rotacao para nao repetir)
         if not img_url:
             musculos = CATEGORIAS_PARA_MUSCULOS.get(categoria, [])
             for musculo in musculos:
