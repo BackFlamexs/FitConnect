@@ -1,6 +1,5 @@
 package com.example.fitconnect
 
-import android.app.DatePickerDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -25,7 +24,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
-import java.util.Calendar
 import java.util.Locale
 
 class EditarPerfilActivity : AppCompatActivity() {
@@ -83,7 +81,7 @@ class EditarPerfilActivity : AppCompatActivity() {
         carregarFotoAtual()
 
         btnVoltar.setOnClickListener { finish() }
-        etDataNascimento.setOnClickListener { mostrarSeletorData(etDataNascimento) }
+        etDataNascimento.addTextChangedListener(mascaraData(etDataNascimento))
         etBiografia.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -246,30 +244,38 @@ class EditarPerfilActivity : AppCompatActivity() {
         }
     }
 
-    private fun mostrarSeletorData(campo: EditText) {
-        val partes = (campo.tag as? String).orEmpty().split("-")
-        val calendario = Calendar.getInstance().apply {
-            if (partes.size == 3) {
-                set(
-                    partes[0].toIntOrNull() ?: get(Calendar.YEAR),
-                    (partes[1].toIntOrNull() ?: 1) - 1,
-                    partes[2].toIntOrNull() ?: 1
-                )
-            } else {
-                add(Calendar.YEAR, -18)
+    private fun mascaraData(campo: EditText): TextWatcher {
+        return object : TextWatcher {
+            private var atualizando = false
+            private val mascara = "##/##/####"
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (atualizando) return
+                atualizando = true
+                val digitos = s?.filter { it.isDigit() }?.toString() ?: ""
+                val resultado = StringBuilder()
+                var i = 0
+                for (c in mascara) {
+                    if (i >= digitos.length) break
+                    if (c == '#') resultado.append(digitos[i++]) else resultado.append(c)
+                }
+                campo.setText(resultado.toString())
+                campo.setSelection(resultado.length)
+                campo.tag = if (resultado.length == 10) parsearDataParaBanco(resultado.toString()) else null
+                atualizando = false
             }
         }
-        DatePickerDialog(
-            this,
-            { _, ano, mes, dia ->
-                val dataBanco = "%04d-%02d-%02d".format(ano, mes + 1, dia)
-                campo.setText(formatarDataTela(dataBanco))
-                campo.tag = dataBanco
-            },
-            calendario.get(Calendar.YEAR),
-            calendario.get(Calendar.MONTH),
-            calendario.get(Calendar.DAY_OF_MONTH)
-        ).show()
+    }
+
+    private fun parsearDataParaBanco(dataTela: String): String? {
+        val partes = dataTela.split("/")
+        if (partes.size != 3) return null
+        val (dia, mes, ano) = partes
+        if (dia.length != 2 || mes.length != 2 || ano.length != 4) return null
+        return "$ano-$mes-$dia"
     }
 
     private fun formatarDataTela(dataBanco: String): String {

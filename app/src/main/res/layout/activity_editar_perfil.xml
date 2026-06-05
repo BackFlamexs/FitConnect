@@ -274,10 +274,9 @@
             android:layout_height="56dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/bg_input_dark"
-            android:clickable="true"
-            android:focusable="false"
             android:hint="dd/mm/aaaa"
-            android:inputType="none"
+            android:inputType="number"
+            android:maxLength="10"
             android:paddingHorizontal="16dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#A0A0A0"/>

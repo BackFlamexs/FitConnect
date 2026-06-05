@@ -34,6 +34,8 @@ class TreinoAdapter(
     override fun onBindViewHolder(holder: TreinoViewHolder, position: Int) {
         val treino = listaTreinos[position]
 
+        holder.ivCapa.setImageResource(getCapaDrawable(treino.detalhes))
+
         holder.tvNome.text = treino.nome
         holder.tvTagDia.text = treino.tagDia
         holder.tvDiaSemana.text = treino.diaSemana
@@ -98,6 +100,7 @@ class TreinoAdapter(
     override fun getItemCount(): Int = listaTreinos.size
 
     class TreinoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val ivCapa: ImageView = itemView.findViewById(R.id.iv_capa_treino)
         val tvNome: TextView = itemView.findViewById(R.id.tv_nome_treino)
         val tvTagDia: TextView = itemView.findViewById(R.id.tv_tag_dia)
         val tvDiaSemana: TextView = itemView.findViewById(R.id.tv_dia_semana)
@@ -107,15 +110,23 @@ class TreinoAdapter(
         val ivMaisOpcoes: ImageView = itemView.findViewById(R.id.iv_mais_opcoes)
     }
 
+    private fun getCapaDrawable(detalhes: String): Int = when {
+        detalhes.contains("Muscula", ignoreCase = true)  -> R.drawable.treino_musculacao
+        detalhes.contains("Cardio", ignoreCase = true)   -> R.drawable.treino_cardio
+        detalhes.contains("Funcional", ignoreCase = true) -> R.drawable.treino_funcional
+        detalhes.contains("HIIT", ignoreCase = true)     -> R.drawable.treino_hiit
+        else                                              -> R.drawable.treino_forca
+    }
+
     private fun obterRelacaoDia(diaSemana: String): String {
         val diaTreino = when (normalizarDia(diaSemana)) {
             "SEGUNDA-FEIRA" -> Calendar.MONDAY
-            "TERCA-FEIRA" -> Calendar.TUESDAY
-            "QUARTA-FEIRA" -> Calendar.WEDNESDAY
-            "QUINTA-FEIRA" -> Calendar.THURSDAY
-            "SEXTA-FEIRA" -> Calendar.FRIDAY
-            "SABADO" -> Calendar.SATURDAY
-            "DOMINGO" -> Calendar.SUNDAY
+            "TERCA-FEIRA"   -> Calendar.TUESDAY
+            "QUARTA-FEIRA"  -> Calendar.WEDNESDAY
+            "QUINTA-FEIRA"  -> Calendar.THURSDAY
+            "SEXTA-FEIRA"   -> Calendar.FRIDAY
+            "SABADO"        -> Calendar.SATURDAY
+            "DOMINGO"       -> Calendar.SUNDAY
             else -> return ""
         }
 

@@ -10,14 +10,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="#1C1A24"
         android:layout_marginBottom="12dp">
-        
-        <!-- Placeholder for image -->
+
+        <ImageView
+            android:id="@+id/iv_capa_treino"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:background="#1C1A24"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#333333" />
+            android:background="@drawable/bg_gradient_treino"/>
 
         <TextView
             android:id="@+id/tv_tag_dia"

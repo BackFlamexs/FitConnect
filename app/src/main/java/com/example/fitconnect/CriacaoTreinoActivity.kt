@@ -183,7 +183,6 @@ class CriacaoTreinoActivity : AppCompatActivity() {
             Toast.makeText(this, "Exercício já adicionado.", Toast.LENGTH_SHORT).show()
             return false
         }
-
         val view = layoutInflater.inflate(R.layout.item_exercicio_selecionado, llContainer, false)
 
         view.findViewById<TextView>(R.id.tv_nome_exerc_sel).text = corrigirNomeExercicio(exercicio.nome)
