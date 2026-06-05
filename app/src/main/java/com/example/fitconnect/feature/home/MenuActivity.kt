@@ -1,4 +1,4 @@
-﻿package com.example.fitconnect.feature.home
+package com.example.fitconnect.feature.home
 
 import com.example.fitconnect.R
 import com.example.fitconnect.data.model.*
@@ -10,9 +10,11 @@ import com.example.fitconnect.feature.arquivo.MeusArquivosActivity
 import com.example.fitconnect.feature.feedback.HistoricoFeedbacksActivity
 import com.example.fitconnect.feature.perfil.EditarPerfilActivity
 import com.example.fitconnect.feature.pagamento.PagamentoProActivity
+import com.example.fitconnect.feature.dashboard.DashboardProActivity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -33,10 +35,13 @@ class MenuActivity : AppCompatActivity() {
         val llFeedbacks = findViewById<LinearLayout>(R.id.ll_feedbacks_menu)
         val llGaleria = findViewById<LinearLayout>(R.id.ll_galeria_menu)
         val llFitConnectPro = findViewById<LinearLayout>(R.id.ll_fitconnect_pro_menu)
+        val llDashboardPro = findViewById<LinearLayout>(R.id.ll_dashboard_pro_menu)
+        val llProUpgradeContent = findViewById<LinearLayout>(R.id.ll_pro_upgrade_content)
+        val llProAtivoContent = findViewById<LinearLayout>(R.id.ll_pro_ativo_content)
         val btnAtualizarPro = findViewById<Button>(R.id.btn_atualizar_pro_menu)
         val btnSair = findViewById<Button>(R.id.btn_sair_menu)
         val tvNomeUsuario = findViewById<TextView>(R.id.tv_nome_usuario_menu)
-        val vFecharMenu = findViewById<android.view.View>(R.id.v_fechar_menu)
+        val vFecharMenu = findViewById<View>(R.id.v_fechar_menu)
         val ivFotoMenu = findViewById<ImageView>(R.id.iv_foto_menu)
 
         val nomeUsuario = intent.getStringExtra("NOME_USUARIO") ?: Sessao.obterNomeUsuario(this)
@@ -51,23 +56,38 @@ class MenuActivity : AppCompatActivity() {
                 .into(ivFotoMenu)
         }
 
-        // Fechar menu clicando na área escura da direita
-        vFecharMenu.setOnClickListener { finish() }
+        val isPro = Sessao.obterPro(this)
+        val isPersonal = Sessao.obterAccountType(this) == "personal"
 
-        // Voltar
+        when {
+            isPersonal -> {
+                // Personal tem acesso completo — esconde banner PRO e mostra Dashboard
+                llFitConnectPro.visibility = View.GONE
+                llDashboardPro.visibility = View.VISIBLE
+            }
+            isPro -> {
+                // Aluno PRO — mostra Dashboard, mostra banner com "PRO Ativo"
+                llDashboardPro.visibility = View.VISIBLE
+                llProUpgradeContent.visibility = View.GONE
+                llProAtivoContent.visibility = View.VISIBLE
+            }
+            else -> {
+                // Aluno free — mostra banner para upgrade, esconde Dashboard
+                llDashboardPro.visibility = View.GONE
+                llProUpgradeContent.visibility = View.VISIBLE
+                llProAtivoContent.visibility = View.GONE
+            }
+        }
+
+        vFecharMenu.setOnClickListener { finish() }
         btnVoltar.setOnClickListener { finish() }
 
-        // Editar Perfil
         llEditarPerfil.setOnClickListener {
             startActivity(Intent(this, EditarPerfilActivity::class.java))
         }
-
-        // Treinos
         llTreinos.setOnClickListener {
             startActivity(Intent(this, TreinosActivity::class.java))
         }
-
-        // Em desenvolvimento
         llMeusArquivos.setOnClickListener {
             startActivity(Intent(this, MeusArquivosActivity::class.java))
         }
@@ -77,14 +97,18 @@ class MenuActivity : AppCompatActivity() {
         llGaleria.setOnClickListener {
             startActivity(Intent(this, GaleriaExerciciosActivity::class.java))
         }
+        llDashboardPro.setOnClickListener {
+            startActivity(Intent(this, DashboardProActivity::class.java))
+        }
         llFitConnectPro.setOnClickListener {
-            startActivity(Intent(this, PagamentoProActivity::class.java))
+            if (!isPro && !isPersonal) {
+                startActivity(Intent(this, PagamentoProActivity::class.java))
+            }
         }
         btnAtualizarPro.setOnClickListener {
             startActivity(Intent(this, PagamentoProActivity::class.java))
         }
 
-        // Sair — limpa sessão e volta ao login
         btnSair.setOnClickListener {
             Sessao.limpar(this)
             val intent = Intent(this, MainActivity::class.java)

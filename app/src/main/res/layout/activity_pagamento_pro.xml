@@ -48,44 +48,62 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <!-- Hero: Plano Pro -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_pro_banner"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="24dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Plano Pro"
                         android:textColor="@color/fit_text_primary"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="Estatisticas avancadas, planos exclusivos e acompanhamento completo."
+                        android:text="Desbloqueie todo o potencial do FitConnect"
                         android:textColor="@color/fit_text_secondary"
-                        android:textSize="14sp" />
+                        android:textSize="13sp" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
-                        android:text="R$ 19,90 / mes"
-                        android:textColor="@color/fit_primary_green"
-                        android:textSize="26sp"
-                        android:textStyle="bold" />
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R$ 19,90"
+                            android:textColor="@color/fit_primary_green"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:text="/mês"
+                            android:textColor="@color/fit_text_secondary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
+                <!-- Benefícios -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="BENEFICIOS"
+                    android:text="BENEFÍCIOS INCLUSOS"
                     android:textColor="@color/fit_text_secondary"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -98,30 +116,43 @@
                     android:orientation="vertical"
                     android:padding="18dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="- Estatisticas de evolucao"
-                        android:textColor="@color/fit_text_primary"
-                        android:textSize="15sp" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓" android:textColor="#4CAF50" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Treinos ilimitados" android:textColor="@color/fit_text_primary" android:textSize="15sp" android:layout_marginStart="12dp"/>
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="- Planos de treino exclusivos"
-                        android:textColor="@color/fit_text_primary"
-                        android:textSize="15sp" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="14dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓" android:textColor="#4CAF50" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Estatísticas avançadas" android:textColor="@color/fit_text_primary" android:textSize="15sp" android:layout_marginStart="12dp"/>
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="- Historico completo de desempenho"
-                        android:textColor="@color/fit_text_primary"
-                        android:textSize="15sp" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="14dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓" android:textColor="#4CAF50" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Histórico completo" android:textColor="@color/fit_text_primary" android:textSize="15sp" android:layout_marginStart="12dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="14dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓" android:textColor="#4CAF50" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Evolução mensal" android:textColor="@color/fit_text_primary" android:textSize="15sp" android:layout_marginStart="12dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="14dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓" android:textColor="#4CAF50" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Acompanhamento do personal" android:textColor="@color/fit_text_primary" android:textSize="15sp" android:layout_marginStart="12dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="14dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓" android:textColor="#4CAF50" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Feedbacks avançados" android:textColor="@color/fit_text_primary" android:textSize="15sp" android:layout_marginStart="12dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="14dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓" android:textColor="#4CAF50" android:textSize="16sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Relatórios de desempenho" android:textColor="@color/fit_text_primary" android:textSize="15sp" android:layout_marginStart="12dp"/>
+                    </LinearLayout>
                 </LinearLayout>
 
+                <!-- Forma de pagamento -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -132,6 +163,7 @@
                     android:textStyle="bold" />
 
                 <RadioGroup
+                    android:id="@+id/rg_pagamento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -145,7 +177,7 @@
                         android:layout_height="48dp"
                         android:buttonTint="@color/fit_primary_green"
                         android:checked="true"
-                        android:text="Cartao de credito"
+                        android:text="Cartão de crédito"
                         android:textColor="@color/fit_text_primary"
                         android:textSize="14sp" />
 
@@ -158,15 +190,35 @@
                         android:textColor="@color/fit_text_primary"
                         android:textSize="14sp" />
                 </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="Pagamento 100% seguro e simulado para demonstração"
+                    android:textColor="@color/fit_text_secondary"
+                    android:textSize="11sp" />
+
             </LinearLayout>
         </ScrollView>
 
+        <!-- Barra de confirmação -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="88dp"
+            android:layout_height="wrap_content"
             android:background="#1C1A24"
             android:gravity="center"
+            android:orientation="vertical"
             android:padding="16dp">
+
+            <ProgressBar
+                android:id="@+id/pb_loading_pagamento"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                android:indeterminateTint="@color/fit_primary_green" />
 
             <Button
                 android:id="@+id/btn_confirmar_pagamento_pro"

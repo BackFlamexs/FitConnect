@@ -36,6 +36,9 @@ data class TreinoAtualizar(
     val detalhes: String? = null
 )
 
+// Atualiza somente o campo pro
+data class UsuarioProAtualizar(val pro: Boolean)
+
 // Corpo para atualizar dados do usuário (PATCH)
 data class UsuarioAtualizar(
     val nome_completo: String,
@@ -186,6 +189,14 @@ object Sessao {
 
     fun obterBiografia(context: Context): String =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString("biografia", "") ?: ""
+
+    fun salvarPro(context: Context, pro: Boolean) =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
+            .putBoolean("pro", pro)
+            .apply()
+
+    fun obterPro(context: Context): Boolean =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getBoolean("pro", false)
 
     fun limpar(context: Context) =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().clear().apply()

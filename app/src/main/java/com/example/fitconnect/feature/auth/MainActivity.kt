@@ -102,6 +102,7 @@ class MainActivity : AppCompatActivity() {
                                     dataNascimento,
                                     biografia
                                 )
+                                Sessao.salvarPro(this@MainActivity, usuario.pro ?: false)
 
                                 val destino = if (accountType == "personal") {
                                     PersonalHomeActivity::class.java

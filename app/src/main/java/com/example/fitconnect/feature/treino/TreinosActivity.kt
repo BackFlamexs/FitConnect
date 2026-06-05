@@ -1,8 +1,9 @@
-﻿package com.example.fitconnect.feature.treino
+package com.example.fitconnect.feature.treino
 
 import com.example.fitconnect.R
 import com.example.fitconnect.data.model.*
 import com.example.fitconnect.core.network.RetrofitClient
+import com.example.fitconnect.feature.pagamento.PagamentoProActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,7 @@ import retrofit2.Response
 class TreinosActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var btnAdicionar: Button
     private var todosTreinos = listOf<Treino>()
     private var filtroAtual = "Todos"
 
@@ -35,7 +38,7 @@ class TreinosActivity : AppCompatActivity() {
         setContentView(R.layout.activity_treinos)
 
         val btnVoltar = findViewById<ImageView>(R.id.iv_voltar_treinos)
-        val btnAdicionar = findViewById<Button>(R.id.btn_adicionar_treino)
+        btnAdicionar = findViewById(R.id.btn_adicionar_treino)
         recyclerView = findViewById(R.id.rv_treinos)
 
         filtroTodos = findViewById(R.id.filtro_todos)
@@ -46,7 +49,16 @@ class TreinosActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         btnVoltar.setOnClickListener { finish() }
-        btnAdicionar.visibility = View.GONE
+
+        val isPro = Sessao.obterPro(this)
+        val isPersonal = Sessao.obterAccountType(this) == "personal"
+
+        if (isPersonal) {
+            btnAdicionar.visibility = View.GONE
+        } else {
+            btnAdicionar.visibility = View.VISIBLE
+            btnAdicionar.setOnClickListener { tentarCriarTreino() }
+        }
 
         val todosChips = listOf(filtroTodos, filtroForca, filtroCardio, filtroMusculacao)
 
@@ -72,17 +84,37 @@ class TreinosActivity : AppCompatActivity() {
         carregarTreinos()
     }
 
+    private fun tentarCriarTreino() {
+        val isPro = Sessao.obterPro(this)
+        if (!isPro && todosTreinos.size >= 3) {
+            AlertDialog.Builder(this)
+                .setTitle("Limite atingido")
+                .setMessage("Usuários gratuitos podem criar até 3 treinos.\n\nAssine o FitConnect Pro para criar treinos ilimitados!")
+                .setPositiveButton("Assinar PRO") { _, _ ->
+                    startActivity(Intent(this, PagamentoProActivity::class.java))
+                }
+                .setNegativeButton("Cancelar", null)
+                .show()
+        } else {
+            startActivity(Intent(this, CriacaoTreinoActivity::class.java))
+        }
+    }
+
+    private fun atualizarBotaoAdicionar() {
+        val isPro = Sessao.obterPro(this)
+        val isPersonal = Sessao.obterAccountType(this) == "personal"
+        if (isPersonal) return
+
+        val bloqueado = !isPro && todosTreinos.size >= 3
+        btnAdicionar.text = if (bloqueado) "LIMITE ATINGIDO — PRO" else "+ NOVO TREINO"
+        btnAdicionar.alpha = if (bloqueado) 0.7f else 1.0f
+    }
+
     private fun aplicarFiltro() {
         val filtrado = when (filtroAtual) {
-            "Força" -> todosTreinos.filter {
-                it.detalhes.contains("Força", ignoreCase = true)
-            }
-            "Cardio" -> todosTreinos.filter {
-                it.detalhes.contains("Cardio", ignoreCase = true)
-            }
-            "Musculação" -> todosTreinos.filter {
-                it.detalhes.contains("Musculação", ignoreCase = true)
-            }
+            "Força" -> todosTreinos.filter { it.detalhes.contains("Força", ignoreCase = true) }
+            "Cardio" -> todosTreinos.filter { it.detalhes.contains("Cardio", ignoreCase = true) }
+            "Musculação" -> todosTreinos.filter { it.detalhes.contains("Musculação", ignoreCase = true) }
             else -> todosTreinos
         }
         recyclerView.adapter = criarAdapter(filtrado)
@@ -90,7 +122,7 @@ class TreinosActivity : AppCompatActivity() {
 
     private fun criarAdapter(lista: List<Treino>): TreinoAdapter {
         return TreinoAdapter(lista, { treino ->
-            androidx.appcompat.app.AlertDialog.Builder(this)
+            AlertDialog.Builder(this)
                 .setTitle("Excluir treino")
                 .setMessage("Deseja excluir \"${treino.nome}\"?")
                 .setPositiveButton("Excluir") { _, _ ->
@@ -121,12 +153,9 @@ class TreinosActivity : AppCompatActivity() {
                     (response.body() ?: emptyList())
                         .map { it.treino_nome.trim().lowercase() }
                         .toSet()
-                } else {
-                    emptySet()
-                }
+                } else emptySet()
                 carregarTreinosDoUsuario(usuarioId)
             }
-
             override fun onFailure(call: Call<List<FeedbackBanco>>, t: Throwable) {
                 treinosConcluidos = emptySet()
                 carregarTreinosDoUsuario(usuarioId)
@@ -149,6 +178,7 @@ class TreinosActivity : AppCompatActivity() {
                         )
                     } ?: emptyList()
                     aplicarFiltro()
+                    atualizarBotaoAdicionar()
                 } else {
                     Toast.makeText(this@TreinosActivity, "Erro: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }

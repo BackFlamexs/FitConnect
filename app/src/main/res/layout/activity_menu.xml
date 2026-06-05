@@ -169,7 +169,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:layout_marginBottom="32dp">
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -186,12 +187,49 @@
                 android:layout_marginStart="16dp" />
         </LinearLayout>
 
+        <!-- Dashboard PRO (visível só para membros PRO e personal) -->
+        <LinearLayout
+            android:id="@+id/ll_dashboard_pro_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_icon_menu"
+                android:padding="8dp"
+                android:src="@drawable/ic_menu_treinos"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DASHBOARD PRO"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" PRO "
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_pill_green"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"/>
+        </LinearLayout>
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- PRO Banner -->
+        <!-- PRO Banner (visível só para alunos free) -->
         <LinearLayout
             android:id="@+id/ll_fitconnect_pro_menu"
             android:layout_width="match_parent"
@@ -199,35 +237,69 @@
             android:background="@drawable/bg_pro_banner"
             android:orientation="vertical"
             android:padding="20dp"
+            android:layout_marginTop="24dp"
             android:layout_marginBottom="32dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="FitConnect PRO"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-                
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Acesse estatísticas avançadas e planos exclusivos."
-                android:textColor="#A0A0A0"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="16dp"/>
-
-            <Button
-                android:id="@+id/btn_atualizar_pro_menu"
+            <!-- Estado: free -->
+            <LinearLayout
+                android:id="@+id/ll_pro_upgrade_content"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:text="ATUALIZAR AGORA"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="@drawable/bg_btn_green"
-                app:backgroundTint="@null" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FitConnect PRO"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Acesse estatísticas avançadas e planos exclusivos."
+                    android:textColor="#A0A0A0"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"/>
+
+                <Button
+                    android:id="@+id/btn_atualizar_pro_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:text="ATUALIZAR AGORA"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_btn_green"
+                    app:backgroundTint="@null" />
+            </LinearLayout>
+
+            <!-- Estado: PRO ativo -->
+            <LinearLayout
+                android:id="@+id/ll_pro_ativo_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓ PRO ATIVO"
+                    android:textColor="#4CAF50"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Você é membro PRO do FitConnect!"
+                    android:textColor="#A0A0A0"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
         </LinearLayout>
 
         <!-- Botão Sair -->

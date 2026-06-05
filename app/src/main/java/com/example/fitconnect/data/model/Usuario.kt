@@ -24,5 +24,6 @@ data class Usuario(
     val altura: Int? = null,
     val account_type: String? = "student",
     val data_nascimento: String? = null,
-    val biografia: String? = null
+    val biografia: String? = null,
+    val pro: Boolean? = false
 )

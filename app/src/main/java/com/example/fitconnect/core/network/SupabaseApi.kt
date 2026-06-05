@@ -41,6 +41,13 @@ interface SupabaseApi {
         @Body dados: UsuarioAtualizar
     ): Call<Void>
 
+    @Headers("Prefer: return=minimal")
+    @PATCH("rest/v1/usuarios")
+    fun atualizarPro(
+        @Query("id") id: String,
+        @Body dados: UsuarioProAtualizar
+    ): Call<Void>
+
     // ── Treinos ───────────────────────────────────────────────────────────────
 
     @GET("rest/v1/treinos")

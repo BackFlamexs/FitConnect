@@ -50,6 +50,7 @@
         <activity android:name="com.example.fitconnect.feature.arquivo.MeusArquivosActivity" android:exported="false" />
         <activity android:name="com.example.fitconnect.feature.arquivo.AdicionarArquivoActivity" android:exported="false" />
         <activity android:name="com.example.fitconnect.feature.pagamento.PagamentoProActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.dashboard.DashboardProActivity" android:exported="false" />
 
     </application>
 
