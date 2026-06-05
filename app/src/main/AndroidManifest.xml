@@ -15,7 +15,7 @@
         android:theme="@style/Theme.FitConnect">
 
         <activity
-            android:name=".SplashActivity"
+            android:name="com.example.fitconnect.feature.auth.SplashActivity"
             android:theme="@style/Theme.FitConnect.Splash"
             android:exported="true">
             <intent-filter>
@@ -25,31 +25,31 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.fitconnect.feature.auth.MainActivity"
             android:exported="false" />
-        <activity android:name=".HomeActivity" android:exported="false" />
-        <activity android:name=".PersonalHomeActivity" android:exported="false" />
-        <activity android:name=".PersonalAlunoFeedbacksActivity" android:exported="false" />
-        <activity android:name=".PersonalAlunoTreinosActivity" android:exported="false" />
-        <activity android:name=".MenuActivity" android:theme="@style/Theme.FitConnect.Transparent" android:exported="false" />
-        <activity android:name=".CadastroActivity" android:exported="false" />
-        <activity android:name=".RecuperarSenhaActivity" android:exported="false" />
-        <activity android:name=".EditarPerfilActivity" android:exported="false" />
-        <activity android:name=".TreinosActivity" android:exported="false" />
-        <activity android:name=".CriacaoTreinoActivity" android:exported="false" />
-        <activity android:name=".DetalheTreinoActivity" android:exported="false" />
-        <activity android:name=".DetalheExercicioTreinoActivity" android:exported="false" />
-        <activity android:name=".ExecucaoTreinoActivity" android:exported="false" />
-        <activity android:name=".EditarTreinoActivity" android:exported="false" />
-        <activity android:name=".AjudaActivity" android:exported="false" />
-        <activity android:name=".ContatoSuporteActivity" android:exported="false" />
-        <activity android:name=".FeedbackPosTreinoActivity" android:exported="false" />
-        <activity android:name=".HistoricoFeedbacksActivity" android:exported="false" />
-        <activity android:name=".GaleriaExerciciosActivity" android:exported="false" />
-        <activity android:name=".DetalheGaleriaExercicioActivity" android:exported="false" />
-        <activity android:name=".MeusArquivosActivity" android:exported="false" />
-        <activity android:name=".AdicionarArquivoActivity" android:exported="false" />
-        <activity android:name=".PagamentoProActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.home.HomeActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.personal.PersonalHomeActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.personal.PersonalAlunoFeedbacksActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.personal.PersonalAlunoTreinosActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.home.MenuActivity" android:theme="@style/Theme.FitConnect.Transparent" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.auth.CadastroActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.auth.RecuperarSenhaActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.perfil.EditarPerfilActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.treino.TreinosActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.treino.CriacaoTreinoActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.treino.DetalheTreinoActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.exercicio.DetalheExercicioTreinoActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.treino.ExecucaoTreinoActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.treino.EditarTreinoActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.suporte.AjudaActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.suporte.ContatoSuporteActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.feedback.FeedbackPosTreinoActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.feedback.HistoricoFeedbacksActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.exercicio.GaleriaExerciciosActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.exercicio.DetalheGaleriaExercicioActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.arquivo.MeusArquivosActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.arquivo.AdicionarArquivoActivity" android:exported="false" />
+        <activity android:name="com.example.fitconnect.feature.pagamento.PagamentoProActivity" android:exported="false" />
 
     </application>
 
