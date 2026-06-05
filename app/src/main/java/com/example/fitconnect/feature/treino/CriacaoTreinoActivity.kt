@@ -50,6 +50,13 @@ class CriacaoTreinoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Sessao.obterAccountType(this) != "personal") {
+            Toast.makeText(this, "Acesso não permitido.", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_criacao_treino)
         usuarioDestinoId = intent.getIntExtra("USUARIO_ID_DESTINO", Sessao.obterUsuarioId(this))
 

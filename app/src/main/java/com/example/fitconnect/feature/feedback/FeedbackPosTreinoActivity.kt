@@ -3,6 +3,7 @@
 import com.example.fitconnect.R
 import com.example.fitconnect.data.model.*
 import com.example.fitconnect.core.network.RetrofitClient
+import com.example.fitconnect.feature.treino.TreinosActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -132,6 +133,9 @@ class FeedbackPosTreinoActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     Toast.makeText(this@FeedbackPosTreinoActivity,
                         "Feedback enviado! Bom trabalho!", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@FeedbackPosTreinoActivity, TreinosActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    startActivity(intent)
                     finish()
                 } else {
                     Toast.makeText(this@FeedbackPosTreinoActivity,

@@ -3,16 +3,10 @@ package com.example.fitconnect.feature.treino
 import com.example.fitconnect.R
 import com.example.fitconnect.data.model.*
 import com.example.fitconnect.core.network.RetrofitClient
-import com.example.fitconnect.feature.pagamento.PagamentoProActivity
 
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -55,14 +49,15 @@ class TreinosActivity : AppCompatActivity() {
 
         btnVoltar.setOnClickListener { finish() }
 
-        val isPro = Sessao.obterPro(this)
         val isPersonal = Sessao.obterAccountType(this) == "personal"
 
         if (isPersonal) {
-            btnAdicionar.visibility = View.GONE
-        } else {
             btnAdicionar.visibility = View.VISIBLE
-            btnAdicionar.setOnClickListener { tentarCriarTreino() }
+            btnAdicionar.setOnClickListener {
+                startActivity(Intent(this, CriacaoTreinoActivity::class.java))
+            }
+        } else {
+            btnAdicionar.visibility = View.GONE
         }
 
         val todosChips = listOf(filtroTodos, filtroForca, filtroCardio, filtroMusculacao)
@@ -89,41 +84,9 @@ class TreinosActivity : AppCompatActivity() {
         carregarTreinos()
     }
 
-    private fun tentarCriarTreino() {
-        val isPro = Sessao.obterPro(this)
-        if (!isPro && todosTreinos.size >= 3) {
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.dialog_limite_treinos)
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.window?.setLayout(
-                (resources.displayMetrics.widthPixels * 0.88).toInt(),
-                WindowManager.LayoutParams.WRAP_CONTENT
-            )
-            dialog.setCancelable(true)
-
-            dialog.findViewById<Button>(R.id.btn_assinar_pro).setOnClickListener {
-                dialog.dismiss()
-                startActivity(Intent(this, PagamentoProActivity::class.java))
-            }
-            dialog.findViewById<Button>(R.id.btn_cancelar_limite).setOnClickListener {
-                dialog.dismiss()
-            }
-
-            dialog.show()
-        } else {
-            startActivity(Intent(this, CriacaoTreinoActivity::class.java))
-        }
-    }
-
     private fun atualizarBotaoAdicionar() {
-        val isPro = Sessao.obterPro(this)
         val isPersonal = Sessao.obterAccountType(this) == "personal"
-        if (isPersonal) return
-
-        val bloqueado = !isPro && todosTreinos.size >= 3
-        btnAdicionar.text = if (bloqueado) "LIMITE ATINGIDO — PRO" else "+ NOVO TREINO"
-        btnAdicionar.alpha = if (bloqueado) 0.7f else 1.0f
+        btnAdicionar.visibility = if (isPersonal) View.VISIBLE else View.GONE
     }
 
     private fun aplicarFiltro() {
@@ -183,7 +146,7 @@ class TreinosActivity : AppCompatActivity() {
         RetrofitClient.api.buscarTreinosPorUsuario("eq.$usuarioId").enqueue(object : Callback<List<TreinoBanco>> {
             override fun onResponse(call: Call<List<TreinoBanco>>, response: Response<List<TreinoBanco>>) {
                 if (response.isSuccessful) {
-                    todosTreinos = response.body()?.map { banco ->
+                    todosTreinos = (response.body()?.map { banco ->
                         Treino(
                             id = banco.id,
                             nome = banco.nome,
@@ -192,7 +155,7 @@ class TreinosActivity : AppCompatActivity() {
                             detalhes = banco.detalhes,
                             concluido = banco.nome.trim().lowercase() in treinosConcluidos
                         )
-                    } ?: emptyList()
+                    } ?: emptyList()).sortedBy { it.concluido }
                     aplicarFiltro()
                     atualizarBotaoAdicionar()
                 } else {

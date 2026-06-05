@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.PopupMenu
+import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.util.Calendar
@@ -74,30 +74,29 @@ class TreinoAdapter(
         holder.ivMaisOpcoes.visibility = if (permitirGerenciar) View.VISIBLE else View.GONE
         holder.ivMaisOpcoes.setOnClickListener { view ->
             if (!permitirGerenciar) return@setOnClickListener
-            val popup = PopupMenu(view.context, view)
-            popup.menu.add(0, 1, 0, "Editar treino")
-            popup.menu.add(0, 2, 1, "Excluir treino")
-            popup.setOnMenuItemClickListener { item ->
-                when (item.itemId) {
-                    1 -> {
-                        val ctx = holder.itemView.context
-                        val intent = Intent(ctx, EditarTreinoActivity::class.java)
-                        intent.putExtra("TREINO_ID", treino.id)
-                        intent.putExtra("NOME_TREINO", treino.nome)
-                        intent.putExtra("TAG_DIA", treino.tagDia)
-                        intent.putExtra("DIA_SEMANA", treino.diaSemana)
-                        intent.putExtra("DETALHES_TREINO", treino.detalhes)
-                        ctx.startActivity(intent)
-                        true
-                    }
-                    2 -> {
-                        onDeletar(treino)
-                        true
-                    }
-                    else -> false
-                }
+            val ctx = view.context
+            val popupView = LayoutInflater.from(ctx).inflate(R.layout.dialog_opcoes_treino, null)
+            val density = ctx.resources.displayMetrics.density
+            val widthPx = (180 * density).toInt()
+            val popup = PopupWindow(popupView, widthPx, ViewGroup.LayoutParams.WRAP_CONTENT, true)
+            popup.elevation = 16f
+
+            popupView.findViewById<TextView>(R.id.tv_opcao_editar).setOnClickListener {
+                popup.dismiss()
+                val intent = Intent(ctx, EditarTreinoActivity::class.java)
+                intent.putExtra("TREINO_ID", treino.id)
+                intent.putExtra("NOME_TREINO", treino.nome)
+                intent.putExtra("TAG_DIA", treino.tagDia)
+                intent.putExtra("DIA_SEMANA", treino.diaSemana)
+                intent.putExtra("DETALHES_TREINO", treino.detalhes)
+                ctx.startActivity(intent)
             }
-            popup.show()
+            popupView.findViewById<TextView>(R.id.tv_opcao_excluir).setOnClickListener {
+                popup.dismiss()
+                onDeletar(treino)
+            }
+
+            popup.showAsDropDown(view, -(widthPx - view.width), 0)
         }
     }
 

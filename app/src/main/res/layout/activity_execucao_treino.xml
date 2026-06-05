@@ -100,11 +100,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
-                <View
+                <ImageView
                     android:id="@+id/v_img_aquec"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:background="#1C1A24"
+                    android:src="@drawable/ic_intensidade_leve"
+                    android:background="@drawable/bg_card_dark"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
                     android:layout_marginEnd="16dp"/>
                 <LinearLayout
                     android:layout_toEndOf="@id/v_img_aquec"
@@ -195,11 +198,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp">
-                <View
+                <ImageView
                     android:id="@+id/v_img_supino"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:background="#1C1A24"
+                    android:src="@drawable/ic_fitness_topic"
+                    android:background="@drawable/bg_card_dark"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
                     android:layout_marginEnd="16dp"/>
                 <LinearLayout
                     android:layout_toEndOf="@id/v_img_supino"
@@ -260,49 +266,20 @@
 
         </LinearLayout>
 
-        <!-- Finalizar Row -->
-        <LinearLayout
+        <!-- Botão Finalizar -->
+        <Button
+            android:id="@+id/btn_finalizar_treino"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:layout_height="52dp"
+            android:text="Finalizar Treino"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:background="@drawable/bg_btn_green"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Progresso"
-                android:textColor="#A0A0A0"
-                android:textSize="12sp"
-                android:layout_marginEnd="16dp"/>
-            <ProgressBar
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:progress="35"
-                android:progressTint="#4CAF50"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="35%"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"/>
-                
-            <Button
-                android:id="@+id/btn_finalizar_treino"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="Finalizar Treino"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:background="@drawable/bg_btn_green"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:backgroundTint="@null"/>
-        </LinearLayout>
+            android:layout_marginBottom="16dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:backgroundTint="@null"/>
 
     </LinearLayout>
 </ScrollView>

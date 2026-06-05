@@ -7,13 +7,17 @@ import com.example.fitconnect.feature.treino.CriacaoTreinoActivity
 import com.example.fitconnect.feature.treino.TreinoAdapter
 import com.example.fitconnect.feature.treino.Treino
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -87,21 +91,35 @@ class PersonalAlunoTreinosActivity : AppCompatActivity() {
     }
 
     private fun confirmarExclusao(treino: Treino) {
-        AlertDialog.Builder(this)
-            .setTitle("Excluir treino")
-            .setMessage("Deseja excluir \"${treino.nome}\" de $alunoNome?")
-            .setPositiveButton("Excluir") { _, _ ->
-                RetrofitClient.api.deletarTreino("eq.${treino.id}").enqueue(object : Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                        carregarTreinos()
-                    }
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_confirmar_exclusao)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.88).toInt(),
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.setCancelable(true)
 
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                        Toast.makeText(this@PersonalAlunoTreinosActivity, "Erro ao excluir treino", Toast.LENGTH_SHORT).show()
-                    }
-                })
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        dialog.findViewById<TextView>(R.id.tv_mensagem_exclusao).text =
+            "Deseja excluir \"${treino.nome}\" de $alunoNome?"
+
+        dialog.findViewById<Button>(R.id.btn_confirmar_exclusao).setOnClickListener {
+            dialog.dismiss()
+            RetrofitClient.api.deletarTreino("eq.${treino.id}").enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    carregarTreinos()
+                }
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Toast.makeText(this@PersonalAlunoTreinosActivity, "Erro ao excluir treino", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+        dialog.findViewById<Button>(R.id.btn_cancelar_exclusao).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

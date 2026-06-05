@@ -3,6 +3,7 @@
 import com.example.fitconnect.R
 import com.example.fitconnect.data.model.*
 import com.example.fitconnect.core.network.RetrofitClient
+import com.example.fitconnect.feature.home.HomeActivity
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -119,13 +120,17 @@ class EditarPerfilActivity : AppCompatActivity() {
                 Toast.makeText(this, "Informe um e-mail valido.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (etPeso.text.toString().isNotBlank() && (peso == null || peso <= 0.0)) {
-                Toast.makeText(this, "Informe um peso valido.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            if (etPeso.text.toString().trim().isNotBlank()) {
+                if (peso == null || peso < 20.0 || peso > 500.0) {
+                    Toast.makeText(this, "Informe um peso válido entre 20 e 500 kg.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
             }
-            if (etAltura.text.toString().isNotBlank() && (altura == null || altura <= 0)) {
-                Toast.makeText(this, "Informe uma altura valida.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            if (etAltura.text.toString().trim().isNotBlank()) {
+                if (altura == null || altura < 50 || altura > 300) {
+                    Toast.makeText(this, "Informe uma altura válida entre 50 e 300 cm.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
             }
             if (usuarioId == 0) {
                 Toast.makeText(this, "Sessao expirada. Faca login novamente.", Toast.LENGTH_SHORT).show()
@@ -211,10 +216,11 @@ class EditarPerfilActivity : AppCompatActivity() {
                             dataNascimento,
                             biografia
                         )
-                        fotoSelecionadaUri = null
-                        llSucesso.visibility = View.VISIBLE
-                        findViewById<ScrollView>(R.id.sv_editar_perfil).smoothScrollTo(0, 0)
                         Toast.makeText(this@EditarPerfilActivity, "Perfil salvo com sucesso!", Toast.LENGTH_SHORT).show()
+                        val intent = android.content.Intent(this@EditarPerfilActivity, HomeActivity::class.java)
+                        intent.flags = android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP or android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
+                        startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this@EditarPerfilActivity, "Erro: ${response.code()}", Toast.LENGTH_SHORT).show()
                     }
