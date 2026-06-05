@@ -93,6 +93,43 @@
         </LinearLayout>
     </HorizontalScrollView>
 
+    <!-- Banner free (visível apenas para usuários gratuitos) -->
+    <LinearLayout
+        android:id="@+id/ll_banner_free"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_pro_banner"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="14dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Assine o PRO para liberar todos os exercícios da galeria."
+            android:textColor="#FFFFFF"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_banner_assinar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_pill_green"
+            android:text="Assinar"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginStart="12dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
     <!-- Header da lista -->
     <RelativeLayout
         android:layout_width="match_parent"

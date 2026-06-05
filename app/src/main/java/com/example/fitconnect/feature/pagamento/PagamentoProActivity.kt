@@ -6,15 +6,19 @@ import com.example.fitconnect.core.network.RetrofitClient
 import com.example.fitconnect.feature.home.HomeActivity
 import com.example.fitconnect.feature.dashboard.DashboardProActivity
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -62,22 +66,31 @@ class PagamentoProActivity : AppCompatActivity() {
         Sessao.salvarPro(this, true)
         pbLoading.visibility = View.GONE
 
-        AlertDialog.Builder(this)
-            .setTitle("Pagamento aprovado com sucesso!")
-            .setMessage("Você agora é membro PRO do FitConnect!\n\nAproveite treinos ilimitados, estatísticas avançadas e muito mais.")
-            .setPositiveButton("Ver Dashboard PRO") { _, _ ->
-                val intent = Intent(this, DashboardProActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(intent)
-                finish()
-            }
-            .setNegativeButton("Ir para Home") { _, _ ->
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                startActivity(intent)
-                finish()
-            }
-            .setCancelable(false)
-            .show()
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_pagamento_aprovado)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.88).toInt(),
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.setCancelable(false)
+
+        dialog.findViewById<Button>(R.id.btn_ver_dashboard).setOnClickListener {
+            dialog.dismiss()
+            val intent = Intent(this, DashboardProActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            finish()
+        }
+        dialog.findViewById<Button>(R.id.btn_ir_home).setOnClickListener {
+            dialog.dismiss()
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
+        }
+
+        dialog.show()
     }
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1C1A24"
+    android:orientation="vertical"
+    android:padding="28dp">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/ic_check_green"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_circle_profile"
+        android:padding="16dp"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pagamento aprovado!"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bem-vindo ao FitConnect Pro! Aproveite treinos ilimitados, estatísticas avançadas e muito mais."
+        android:textColor="#A0A0A0"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="28dp" />
+
+    <Button
+        android:id="@+id/btn_ver_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_btn_green"
+        android:text="Ver Dashboard PRO"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/btn_ir_home"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_btn_green_outline"
+        android:text="Ir para Home"
+        android:textColor="#4CAF50"
+        android:textStyle="bold"
+        android:textSize="15sp" />
+
+</LinearLayout>

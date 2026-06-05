@@ -5,9 +5,14 @@ import com.example.fitconnect.data.model.*
 import com.example.fitconnect.core.network.RetrofitClient
 import com.example.fitconnect.feature.pagamento.PagamentoProActivity
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -87,14 +92,25 @@ class TreinosActivity : AppCompatActivity() {
     private fun tentarCriarTreino() {
         val isPro = Sessao.obterPro(this)
         if (!isPro && todosTreinos.size >= 3) {
-            AlertDialog.Builder(this)
-                .setTitle("Limite atingido")
-                .setMessage("Usuários gratuitos podem criar até 3 treinos.\n\nAssine o FitConnect Pro para criar treinos ilimitados!")
-                .setPositiveButton("Assinar PRO") { _, _ ->
-                    startActivity(Intent(this, PagamentoProActivity::class.java))
-                }
-                .setNegativeButton("Cancelar", null)
-                .show()
+            val dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.dialog_limite_treinos)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window?.setLayout(
+                (resources.displayMetrics.widthPixels * 0.88).toInt(),
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+            dialog.setCancelable(true)
+
+            dialog.findViewById<Button>(R.id.btn_assinar_pro).setOnClickListener {
+                dialog.dismiss()
+                startActivity(Intent(this, PagamentoProActivity::class.java))
+            }
+            dialog.findViewById<Button>(R.id.btn_cancelar_limite).setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
         } else {
             startActivity(Intent(this, CriacaoTreinoActivity::class.java))
         }

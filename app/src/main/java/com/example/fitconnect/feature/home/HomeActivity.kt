@@ -8,6 +8,8 @@ import com.example.fitconnect.feature.exercicio.GaleriaExerciciosActivity
 import com.example.fitconnect.feature.arquivo.MeusArquivosActivity
 import com.example.fitconnect.feature.feedback.HistoricoFeedbacksActivity
 import com.example.fitconnect.feature.suporte.AjudaActivity
+import com.example.fitconnect.feature.dashboard.DashboardProActivity
+import com.example.fitconnect.feature.pagamento.PagamentoProActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -57,6 +59,8 @@ class HomeActivity : AppCompatActivity() {
         val ivFotoHome = findViewById<ImageView>(R.id.iv_foto_home)
 
         val cardTreinos = findViewById<RelativeLayout>(R.id.card_treinos)
+        val cardDashboardPro = findViewById<RelativeLayout>(R.id.card_dashboard_pro)
+        val llDashboardBloqueado = findViewById<LinearLayout>(R.id.ll_dashboard_bloqueado)
         val cardAjuda = findViewById<RelativeLayout>(R.id.card_ajuda)
         val cardMeusArquivos = findViewById<RelativeLayout>(R.id.card_meus_arquivos)
         val cardFeedbacks = findViewById<RelativeLayout>(R.id.card_feedbacks)
@@ -66,6 +70,21 @@ class HomeActivity : AppCompatActivity() {
         val navGaleria = findViewById<LinearLayout>(R.id.nav_galeria)
         val navAjuda = findViewById<LinearLayout>(R.id.nav_ajuda)
         val navMenu = findViewById<LinearLayout>(R.id.nav_menu)
+
+        val isPro = Sessao.obterPro(this)
+        val isPersonal = Sessao.obterAccountType(this) == "personal"
+
+        if (isPro || isPersonal) {
+            llDashboardBloqueado.visibility = View.GONE
+            cardDashboardPro.setOnClickListener {
+                startActivity(Intent(this, DashboardProActivity::class.java))
+            }
+        } else {
+            llDashboardBloqueado.visibility = View.VISIBLE
+            cardDashboardPro.setOnClickListener {
+                startActivity(Intent(this, PagamentoProActivity::class.java))
+            }
+        }
 
         tvTituloSequencia = findViewById(R.id.tv_titulo_sequencia)
         tvBadgeDias = findViewById(R.id.tv_badge_dias)

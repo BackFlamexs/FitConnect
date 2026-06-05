@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1C1A24"
+    android:orientation="vertical"
+    android:padding="28dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔒"
+        android:textSize="48sp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="14dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Limite atingido"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuários gratuitos podem criar até 3 treinos."
+        android:textColor="#A0A0A0"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_pro_banner"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Assine o FitConnect PRO"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crie treinos ilimitados, acesse estatísticas avançadas e muito mais!"
+            android:textColor="#A0A0A0"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_assinar_pro"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_btn_green"
+        android:text="Assinar PRO"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp" />
+
+    <Button
+        android:id="@+id/btn_cancelar_limite"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:text="Cancelar"
+        android:textColor="#A0A0A0"
+        android:textSize="14sp" />
+
+</LinearLayout>

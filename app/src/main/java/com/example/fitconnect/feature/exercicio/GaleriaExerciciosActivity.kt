@@ -11,6 +11,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -19,6 +20,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fitconnect.feature.pagamento.PagamentoProActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,16 +29,31 @@ class GaleriaExerciciosActivity : AppCompatActivity() {
 
     private lateinit var adapter: ExercicioGaleriaAdapter
     private var todosExercicios = listOf<GaleriaExercicioBanco>()
+    private var exerciciosVisiveis = listOf<GaleriaExercicioBanco>()
     private var categoriaAtual = "Todos"
     private var termoBusca = ""
+    private var isFreeUser = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_galeria_exercicios)
 
+        val isPro = Sessao.obterPro(this)
+        val isPersonal = Sessao.obterAccountType(this) == "personal"
+        isFreeUser = !isPro && !isPersonal
+
         val ivVoltar = findViewById<ImageView>(R.id.iv_voltar_galeria)
         val etBusca = findViewById<EditText>(R.id.et_busca_galeria)
         val rv = findViewById<RecyclerView>(R.id.rv_exercicios_galeria)
+        val llBannerFree = findViewById<LinearLayout>(R.id.ll_banner_free)
+        val tvBannerAssinar = findViewById<TextView>(R.id.tv_banner_assinar)
+
+        if (isFreeUser) {
+            llBannerFree.visibility = View.VISIBLE
+            tvBannerAssinar.setOnClickListener {
+                startActivity(Intent(this, PagamentoProActivity::class.java))
+            }
+        }
 
         val catTodos = findViewById<TextView>(R.id.cat_todos)
         val catPeito = findViewById<TextView>(R.id.cat_peito)
@@ -115,6 +132,7 @@ class GaleriaExerciciosActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<GaleriaExercicioBanco>>, response: Response<List<GaleriaExercicioBanco>>) {
                 if (response.isSuccessful) {
                     todosExercicios = removerDuplicados(response.body() ?: emptyList())
+                    exerciciosVisiveis = if (isFreeUser) filtrarParaFree(todosExercicios) else todosExercicios
                     aplicarFiltro()
                 } else {
                     Toast.makeText(this@GaleriaExerciciosActivity,
@@ -134,8 +152,14 @@ class GaleriaExerciciosActivity : AppCompatActivity() {
             .distinctBy { it.nome.trim().lowercase() }
     }
 
+    private fun filtrarParaFree(lista: List<GaleriaExercicioBanco>): List<GaleriaExercicioBanco> {
+        val categorias = listOf("Peito", "Costas", "Pernas", "Bíceps", "Cardio", "Ombros", "Tríceps")
+        return categorias.mapNotNull { cat -> lista.firstOrNull { it.categoria == cat } }
+    }
+
     private fun aplicarFiltro() {
-        val resultado = todosExercicios.filter { ex ->
+        val base = exerciciosVisiveis
+        val resultado = base.filter { ex ->
             val matchCategoria = categoriaAtual == "Todos" || ex.categoria == categoriaAtual
             val matchBusca = termoBusca.isEmpty() ||
                 ex.nome.contains(termoBusca, ignoreCase = true) ||
